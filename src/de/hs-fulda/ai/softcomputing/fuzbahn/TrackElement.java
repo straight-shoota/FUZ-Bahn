@@ -1,7 +1,5 @@
 package de.hs-fulda.ai.softcomputing.fuzbahn;
 
-import double;
-
 public class TrackElement {
 
   /** 

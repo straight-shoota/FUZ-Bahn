@@ -13,10 +13,19 @@ public class TestMain implements Runnable {
 		prototype.setName("FUZ");
 		prototype.setBrakeAccelerationMax(-1.0);
 		prototype.setLength(100);
-		prototype.setPowerMax(2000);
-		prototype.setPowerMin(-2000);
-		prototype.setMass(120);
-		prototype.setSpeedMax(80);
+		prototype.setPowerMax(2000000);
+		prototype.setPowerMin(-2000000);
+		prototype.setMass(140000);
+		prototype.setSpeedMax(70/3.6);
+		
+		
+		prototype.setName("BrB");
+		prototype.setBrakeAccelerationMax(-1.0);
+		prototype.setLength(40);
+		prototype.setPowerMax(780000);
+		prototype.setPowerMin(-780000);
+		prototype.setMass(80000);
+		prototype.setSpeedMax(80/3.6);
 		
 		t = prototype.createTrain();
 		
@@ -29,7 +38,7 @@ public class TestMain implements Runnable {
 	public void run() {
 		long sleep = Math.round(DELTA_T * 1000);
 		
-		t.setPowerRatio(1);
+		t.setPowerRatio(.8);
 		t.setSpeed(3);
 
 		t.update(0);

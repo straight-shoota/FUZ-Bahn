@@ -10,6 +10,12 @@ public class FuzzyController {
 	private Variable speed;
 	private Variable targetDistance;
 	private Variable targetSpeed;
+	
+	/*
+	 * Output variables
+	 */
+	private Variable powerRatio;
+	private Variable brakeForce;
 
 	public FuzzyController(Train train)
 	throws FuzzyUnavailableException {
@@ -26,15 +32,21 @@ public class FuzzyController {
 		targetDistance = fis.getVariable(Train.TARGET_DISTANCE);
 		targetSpeed = fis.getVariable(Train.TARGET_SPEED);
 		
+		powerRatio = fis.getVariable(Train.POWER_RATIO);
+		brakeForce = fis.getVariable(Train.BRAKE_FORCE);
+		
 		this.train = train;
 	}
 	
-	public void update() {
+	public synchronized void update() {
 		speed.setValue(train.getSpeed());
 		TrackElement target = null;//train.getTarget();
 		targetDistance.setValue(train.getDistance(target));
 		targetSpeed.setValue(train.getSpeed() - target.getSpeed());
 		
 		fis.evaluate();
+		
+		train.setPowerRatio(powerRatio.getValue());
+		train.setBrakeForce(brakeForce.getValue());
 	}
 }

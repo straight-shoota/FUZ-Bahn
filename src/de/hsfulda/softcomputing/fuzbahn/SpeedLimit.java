@@ -2,13 +2,18 @@ package de.hsfulda.softcomputing.fuzbahn;
 
 public class SpeedLimit extends StaticTrackElement {
 
-	public double speedLimit;
+	private double speedLimit;
+
+	public SpeedLimit(double position, double speed) {
+		super(0, position);
+		setSpeed(speed);
+	}
+	
+	public void setSpeed(double speed){
+		this.speedLimit = speed;
+	}
 
 	public double getSpeed() {
-		return 0.0;
+		return this.speedLimit;
 	}
-
-	public void SpeedLimit(double position, double speed) {
-	}
-
 }

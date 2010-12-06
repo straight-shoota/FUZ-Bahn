@@ -1,13 +1,23 @@
 package de.hsfulda.softcomputing.fuzbahn;
 
-import java.util.SortedSet;
+import java.util.*;
 
 public class Track {
 
 	/**
 	 * real length of track (in meters)
 	 */
-	public double length;
+	private double length;
+
+	private SortedSet<TrackElement> elements;
+	private List<Train> trains;
+	
+	public Track(double length){
+		setLength(length);
+		
+		elements = new TreeSet<TrackElement>();
+		trains = new ArrayList<Train>();
+	}
 
 	/**
 	 * @return the length
@@ -20,19 +30,24 @@ public class Track {
 	 * @param length the length to set
 	 */
 	public void setLength(double length) {
+		if(length < 0){
+			throw new IllegalArgumentException("length cannot be negative.");
+		}
 		this.length = length;
 	}
 
-	public SortedSet<TrackElement> elements;
-
-	public void getPrecedingElements(TrackElement e) {
-	}
-
 	public void addElement(TrackElement e) {
+		elements.add(e);
 	}
 
-	public TrackElement removeElement(TrackElement e) {
-		return null;
+	public boolean removeElement(TrackElement e) {
+		return elements.remove(e);
+	}
+	
+	public Train[] getTrains(){
+		Train[] t = new Train[trains.size()];
+		trains.toArray(t);
+		return t;
 	}
 
 	/**
@@ -40,7 +55,11 @@ public class Track {
 	 * Train) changes. It recalculates the order of elements on track if
 	 * necessary.
 	 */
-	public void updateElement(TrackElement e) {
+	public void updateElements() {
+		for(Train t : trains){
+			elements.remove(t);
+			elements.add(t);
+		}
 	}
 
 }

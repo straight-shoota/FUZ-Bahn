@@ -40,6 +40,7 @@ public class Train extends TrackElement {
 	private double acceleration;
 	
 	public Train(TrainPrototype prototype) {
+		super(prototype.getLength());
 		this.prototype = prototype;
 	}
 
@@ -189,6 +190,10 @@ public class Train extends TrackElement {
 		pcs.firePropertyChange(POWER_RATIO, oldValue, powerRatio);
 	}
 	
+	public void setPosition(double position){
+		this.position = position;
+	}
+	
 	/**
 	 * @param speed the speed to set
 	 */
@@ -204,10 +209,12 @@ public class Train extends TrackElement {
 	@Override
 	public String toString() {
 		Format f = new DecimalFormat("#.#");
-		return "Train (" + prototype.getName() + ") [speed=" + Math.round(speed * 3.6) + " km/h, "
-			+ "acceleration=" + f.format(acceleration) + " m/s² "
-			+ "brakeForce=" + f.format(brakeForce) 
-			+ ", power=" + Math.round(powerRatio * 100) + "%]";
+		return "Train (" + prototype.getName() + ") ["
+			+ "position=" + f.format(getPosition()) + " m,\t" 
+			+ "speed=" + Math.round(speed * 3.6) + " km/h,\t"
+			+ "acceleration=" + f.format(acceleration) + " m/s²,\t"
+			//+ "brakeForce=" + f.format(brakeForce) 
+			+ "power=" + Math.round(powerRatio * 100) + "%]";
 	}
 
 	/**
@@ -216,6 +223,10 @@ public class Train extends TrackElement {
 	 * @param deltaT length of time unit in seconds
 	 */
 	public void update(double deltaT) {
+		if(deltaT < 0){
+			throw new IllegalArgumentException("time period must be positive");
+		}
+		
 		double accelerationPower;
 		Format f = new DecimalFormat("#.#");
 		
@@ -227,16 +238,21 @@ public class Train extends TrackElement {
 		accelerationPower *= getPrototype().getEnergyEfficiency();
 		
 		double totalForce = getRollingResistance() + getDragForce();
-		System.out.println("force = " + f.format(totalForce) + " N");
+		//System.out.println("force = " + f.format(totalForce) + " N");
 		double totalPower = accelerationPower - totalForce * getSpeed();
 
-		System.out.println("power = " + f.format(totalPower / 1000) + " kW");
+		//System.out.println("power = " + f.format(totalPower / 1000) + " kW");
 		double kineticEnergy = getMass() * getSpeed() * getSpeed() / 2;
 		
 		double newEnergy = kineticEnergy + deltaT * totalPower;
 		
 		double newSpeed = Math.sqrt(2 * newEnergy / getMass());
-		setAcceleration((newSpeed - getSpeed()) / deltaT);
+		
+		double way = (getSpeed() + newSpeed) / 2 * deltaT;
+		setPosition(getPosition() + way);
+		if(deltaT != 0){
+			setAcceleration((newSpeed - getSpeed()) / deltaT);
+		}
 		setSpeed(newSpeed);
 	}
 

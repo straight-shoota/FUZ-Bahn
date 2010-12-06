@@ -7,6 +7,7 @@ public class TestMain implements Runnable {
 	
 	private boolean running = true;
 	private Train t;
+	private double power = 1;
 	
 	TestMain() {
 		TrainPrototype prototype = new TrainPrototype();
@@ -17,7 +18,6 @@ public class TestMain implements Runnable {
 		prototype.setPowerMin(-2000000);
 		prototype.setMass(140000);
 		prototype.setSpeedMax(70/3.6);
-		
 		
 		prototype.setName("BrB");
 		prototype.setBrakeAccelerationMax(-1.0);
@@ -38,7 +38,7 @@ public class TestMain implements Runnable {
 	public void run() {
 		long sleep = Math.round(DELTA_T * 1000);
 		
-		t.setPowerRatio(.8);
+		t.setPowerRatio(power);
 		t.setSpeed(3);
 
 		t.update(0);
@@ -49,7 +49,7 @@ public class TestMain implements Runnable {
 			try {
 				Thread.sleep(sleep);
 			}catch(InterruptedException exc){
-				
+				running = false;
 			}
 		}
 	}

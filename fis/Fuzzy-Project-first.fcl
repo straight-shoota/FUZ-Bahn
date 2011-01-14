@@ -1,0 +1,119 @@
+FUNCTION_BLOCK
+
+VAR_INPUT
+    Ziel-Abstand REAL; (* RANGE(-200 .. 1400) *)
+    ZielGeschwindigkeitsUnterschied REAL; (* RANGE(-120 .. 120) *)
+    eigeneGeschwindigkeit REAL; (* RANGE(-50 .. 120) *)
+END_VAR
+
+VAR_OUTPUT
+    Motorleistung REAL; (* RANGE(-200 .. 200) *) 
+    Bremskraft REAL; (* RANGE(-50 .. 180) *)
+END_VAR
+
+FUZZIFY Ziel-Abstand
+    TERM sehrGering :=  (-150, 0) (-100, 1) (100, 1) (150, 0);
+    TERM gering := (100, 0) (150, 1) (250, 1) (300, 1);
+    TERM mittel := (250, 0) (300, 1) (630, 1) (680, 0);
+    TERM weit := (650, 0) (700, 1) (800, 1) (850, 0);
+    TERM sehrWeit := (800, 0) (850, 1) (1300, 1) (1350, 0);
+END_FUZZIFY
+
+FUZZIFY ZielGeschwindigkeitsUnterschied
+    TERM Schneller :=  (10, 0) (20, 1) (40, 1) (50, 0);
+    TERM sehrVielLangsamer := (-200, 0) (-120, 1) (-50, 1) (-30, 0);
+    TERM langsamer := (-50, 0) (-40, 1) (-20, 1) (-10, 0);
+    TERM sehrVielSchneller := (40, 0) (50, 1) (120, 1) (150, 0);
+    TERM gleich := (-20, 0) (-10, 1) (10, 1) (20, 0);
+END_FUZZIFY
+
+FUZZIFY eigeneGeschwindigkeit
+    TERM gering :=  (0, 0) (10, 1) (20, 1) (30, 0); 
+    TERM mittel := (20, 0) (30, 1) (50, 1) (60, 0);
+    TERM hoch := (50,0) (60, 1) (80, 1) (90, 0);
+    TERM sehrGering := (-50, 0) (-40, 1) (0, 1) (10, 0);
+    TERM sehrHoch := (80, 0) (90, 1) (120, 1) (140, 1);
+END_FUZZIFY
+
+FUZZIFY Motorleistung
+    TERM gering :=  (-200, 0) (-150, 1) (-50, 1) (-0, 0); 
+    TERM mittel := (-20, 0) (-10, 1) (40, 1) (50, 0);
+    TERM hoch := (30, 0) (60, 1) (70, 1) (100, 0);
+    TERM sehrHoch := (80, 0) (100, 1) (110, 1) (130, 0);
+END_FUZZIFY
+
+FUZZIFY Bremskraft
+    TERM gering :=  (-20, 0) (0, 1) (20, 0); 
+    TERM mittel := (0, 0) (10, 1) (20, 1) (30, 0);
+    TERM hoch := (20, 0) (30, 1) (70, 1) (80, 0);
+    TERM sehrHoch := (70, 0) (80, 1) (120, 1) (130, 0);
+END_FUZZIFY
+
+DEFUZZIFY valve 
+    METHOD: MoM;
+END_DEFUZZIFY
+
+RULEBLOCK allRules
+  RULE 0: IF (Ziel-Abstand IS mittel) AND(ZielGeschwindigkeitsUnterschied IS Schneller) AND (eigeneGeschwindigkeit IS gering)
+          THEN (Motorleistung IS hoch);
+  RULE 1: IF (Ziel-Abstand IS sehrGering) 
+          THEN (Motorleistung IS gering)(Bremskraft IS sehrHoch);
+  RULE 2: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielSchneller) AND (eigeneGeschwindigkeit IS gering) 
+		  THEN (Motorleistung IS hoch);   
+  RULE 3: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS gleich) AND (eigeneGeschwindigkeit IS gering) 
+		  THEN (Motorleistung IS mittel);
+  RULE 4: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS gleich) AND (eigeneGeschwindigkeit IS mittel) 
+		  THEN (Motorleistung IS mittel) ;
+  RULE 5: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS Schneller) AND (eigeneGeschwindigkeit IS mittel) 
+          THEN (Motorleistung IS mittel) ;                                   
+  RULE 6: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS langsamer) AND (eigeneGeschwindigkeit IS mittel) 
+		  THEN (Motorleistung IS gering) ;                                   
+  RULE 7: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielLangsamer) AND (eigeneGeschwindigkeit IS mittel) 
+		  THEN (Motorleistung IS gering) ;                           
+  RULE 8: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielSchneller) AND (eigeneGeschwindigkeit IS mittel) 
+		  THEN (Motorleistung IS mittel) ;                           
+  RULE 9: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielSchneller) AND (eigeneGeschwindigkeit IS hoch) 
+		  THEN (Motorleistung IS mittel) ;                            
+  RULE 10: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielSchneller) AND (eigeneGeschwindigkeit IS sehrHoch) 
+		   THEN (Motorleistung IS mittel) ;                        
+  RULE 11: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS gleich) AND (eigeneGeschwindigkeit IS sehrGering) 
+		   THEN (Motorleistung IS mittel) ;                                 
+  RULE 12: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS gleich) AND (eigeneGeschwindigkeit IS gering) 
+  THEN (Motorleistung IS hoch) ;                                       
+  RULE 13: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS langsamer) AND (eigeneGeschwindigkeit IS gering) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS gering) ;            
+  RULE 14: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielLangsamer) AND (eigeneGeschwindigkeit IS gering) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS gering) ;    
+  RULE 15: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielLangsamer) AND (eigeneGeschwindigkeit IS sehrGering) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS gering) ;
+  RULE 16: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielLangsamer) AND (eigeneGeschwindigkeit IS hoch) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS hoch) ;        
+  RULE 17: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielLangsamer) AND (eigeneGeschwindigkeit IS sehrHoch) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS hoch) ;    
+  RULE 18: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS sehrVielSchneller) AND (eigeneGeschwindigkeit IS sehrGering) 
+		   THEN (Motorleistung IS mittel) ;                      
+  RULE 19: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS Schneller) AND (eigeneGeschwindigkeit IS sehrHoch) 
+		   THEN (Motorleistung IS hoch) ;                                  
+  RULE 20: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS gleich) AND (eigeneGeschwindigkeit IS sehrHoch) 
+		   THEN (Motorleistung IS hoch) ;                                     
+  RULE 21: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS langsamer) AND (eigeneGeschwindigkeit IS sehrHoch) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS mittel) ;          
+  RULE 22: IF (Ziel-Abstand IS gering) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS hoch) ;                                                                                                       
+  RULE 23: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS Schneller) AND (eigeneGeschwindigkeit IS hoch) 
+		   THEN (Motorleistung IS mittel) ;                                    
+  RULE 24: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS gleich) AND (eigeneGeschwindigkeit IS hoch) 
+		   THEN (Motorleistung IS mittel) ;                                       
+  RULE 25: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS langsamer) AND (eigeneGeschwindigkeit IS hoch) 
+		   THEN (Motorleistung IS gering)(Bremskraft IS gering) ;              
+  RULE 26: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS Schneller) AND (eigeneGeschwindigkeit IS sehrGering) 
+		   THEN (Motorleistung IS hoch) ;                                
+  RULE 27: IF (Ziel-Abstand IS mittel) AND (ZielGeschwindigkeitsUnterschied IS langsamer) AND (eigeneGeschwindigkeit IS sehrGering) 
+		   THEN (Motorleistung IS mittel) ;                              
+  RULE 28: IF (Ziel-Abstand IS weit) 
+		   THEN (Motorleistung IS hoch) ;                                                                                                                               
+  RULE 29: IF (Ziel-Abstand IS sehrWeit) 
+		   THEN (Motorleistung IS hoch) ;                                                                                                                           
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

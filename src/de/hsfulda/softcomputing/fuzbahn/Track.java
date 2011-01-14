@@ -2,21 +2,26 @@ package de.hsfulda.softcomputing.fuzbahn;
 
 import java.util.*;
 
-public class Track {
+public class Track 
+implements Iterable<TrackElement>{
 
 	/**
 	 * real length of track (in meters)
 	 */
 	private double length;
 
-	private SortedSet<TrackElement> elements;
+	private NavigableSet<TrackElement> elements;
 	private List<Train> trains;
 	
+	private TrackElement fin;
+	
 	public Track(double length){
-		setLength(length);
-		
 		elements = new TreeSet<TrackElement>();
 		trains = new ArrayList<Train>();
+		
+		setLength(length);
+		
+		fin = new Fin();
 	}
 
 	/**
@@ -36,18 +41,34 @@ public class Track {
 		this.length = length;
 	}
 
-	public void addElement(TrackElement e) {
+
+	public void add(Train t) {
+		//System.out.println("adding train " + t);
+		trains.add(t);
+		add((TrackElement) t);
+	}
+	
+	public void add(TrackElement e) {
+		//System.out.println("adding element " + e);
 		elements.add(e);
+		e.setTrack(this);
 	}
 
-	public boolean removeElement(TrackElement e) {
+	public boolean remove(Train t) {
+		throw new RuntimeException("Removing train " + t);
+		/*trains.remove(t);
+		return remove((TrackElement) t);*/
+	}
+	public boolean remove(TrackElement e) {
+		e.setTrack(null);
 		return elements.remove(e);
 	}
 	
-	public Train[] getTrains(){
-		Train[] t = new Train[trains.size()];
-		trains.toArray(t);
-		return t;
+	public Iterable<Train> getTrains(){
+		return trains;
+	}
+	public Iterator<TrackElement> iterator(){
+		return elements.iterator();
 	}
 
 	/**
@@ -61,5 +82,23 @@ public class Track {
 			elements.add(t);
 		}
 	}
-
+	
+	public TrackElement nextElement(TrackElement t){
+		return elements.higher(t);
+	}
+	
+	public String toString(){
+		return "Track [length=" + getLength() + ",elements=" + elements.size() + ",trains=" + trains.size() + "]";
+	}
+	
+	public class Fin
+	extends TrackElement {
+		public Fin(){
+			super(0, length);
+			add(this);
+		}
+		public double getPosition() {
+			return Track.this.getLength();
+		}
+	}
 }

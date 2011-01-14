@@ -1,0 +1,116 @@
+FUNCTION_BLOCK
+
+VAR_INPUT
+    target_distance: REAL; (* RANGE(-200 .. 1400) *)
+    target_speed: REAL; (* RANGE(-1.2 .. 1.2) *)
+    speed: REAL; (* RANGE(-50 .. 120) *)
+END_VAR
+
+VAR_OUTPUT
+    powerRatio: REAL; (* RANGE(-2 .. 2) *) 
+    brakeForce: REAL; (* RANGE(-.5 .. 1.8) *)
+END_VAR
+
+FUZZIFY target_distance
+    TERM sehrGering :=  (-150, 0) (-100, 1) (100, 1) (150, 0);
+    TERM gering := (100, 0) (150, 1) (250, 1) (300, 1);
+    TERM mittel := (250, 0) (300, 1) (630, 1) (680, 0);
+    TERM weit := (650, 0) (700, 1) (800, 1) (850, 0);
+    TERM sehrWeit := (800, 0) (850, 1) (1300, 1) (1350, 0);
+END_FUZZIFY
+
+FUZZIFY target_speed
+    TERM Schneller :=  (10, 0) (20, 1) (40, 1) (50, 0);
+    TERM sehrVielLangsamer := (-200, 0) (-120, 1) (-50, 1) (-30, 0);
+    TERM langsamer := (-50, 0) (-40, 1) (-20, 1) (-10, 0);
+    TERM sehrVielSchneller := (40, 0) (50, 1) (120, 1) (150, 0);
+    TERM gleich := (-20, 0) (-10, 1) (10, 1) (20, 0);
+END_FUZZIFY
+
+FUZZIFY speed
+    TERM gering :=  (0, 0) (10, 1) (20, 1) (30, 0); 
+    TERM mittel := (20, 0) (30, 1) (50, 1) (60, 0);
+    TERM hoch := (50,0) (60, 1) (80, 1) (90, 0);
+    TERM sehrGering := (-50, 0) (-40, 1) (0, 1) (10, 0);
+    TERM sehrHoch := (80, 0) (90, 1) (120, 1) (140, 1);
+END_FUZZIFY
+
+DEFUZZIFY powerRatio
+    TERM gering :=  (-200, 0) (-150, 1) (-50, 1) (-0, 0); 
+    TERM mittel := (-20, 0) (-10, 1) (40, 1) (50, 0);
+    TERM hoch := (30, 0) (60, 1) (70, 1) (100, 0);
+    TERM sehrHoch := (80, 0) (100, 1) (110, 1) (130, 0);
+    METHOD : COG;
+END_DEFUZZIFY
+
+DEFUZZIFY brakeForce
+    TERM gering :=  (-20, 0) (0, 1) (20, 0); 
+    TERM mittel := (0, 0) (10, 1) (20, 1) (30, 0);
+    TERM hoch := (20, 0) (30, 1) (70, 1) (80, 0);
+    TERM sehrHoch := (70, 0) (80, 1) (120, 1) (130, 0);
+    METHOD : COG;
+END_DEFUZZIFY
+
+RULEBLOCK allRules
+  RULE 0: IF (target_distance IS mittel) AND (target_speed IS Schneller) AND (speed IS gering)
+  			THEN  powerRatio IS hoch;
+  RULE 1: IF (target_distance IS sehrGering)  THEN  powerRatio IS gering,brakeForce IS sehrHoch;
+  RULE 2: IF (target_distance IS mittel) AND (target_speed IS sehrVielSchneller) AND (speed IS gering) 
+		  THEN  powerRatio IS hoch;   
+  RULE 3: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS gering) 
+		  THEN powerRatio IS mittel;
+  RULE 4: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS mittel) 
+		  THEN powerRatio IS mittel;
+  RULE 5: IF (target_distance IS mittel) AND (target_speed IS Schneller) AND (speed IS mittel) 
+          THEN powerRatio IS mittel;                                   
+  RULE 6: IF (target_distance IS mittel) AND (target_speed IS langsamer) AND (speed IS mittel) 
+		  THEN powerRatio IS gering;                                   
+  RULE 7: IF (target_distance IS mittel) AND (target_speed IS sehrVielLangsamer) AND (speed IS mittel) 
+		  THEN powerRatio IS gering;                           
+  RULE 8: IF (target_distance IS mittel) AND (target_speed IS sehrVielSchneller) AND (speed IS mittel) 
+		  THEN powerRatio IS mittel;                           
+  RULE 9: IF (target_distance IS mittel) AND (target_speed IS sehrVielSchneller) AND (speed IS hoch) 
+		  THEN powerRatio IS mittel;                            
+  RULE 10: IF (target_distance IS mittel) AND (target_speed IS sehrVielSchneller) AND (speed IS sehrHoch) 
+		   THEN powerRatio IS mittel;                        
+  RULE 11: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS sehrGering) 
+		   THEN powerRatio IS mittel;                                 
+  RULE 12: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS gering) 
+  THEN powerRatio IS hoch;                                       
+  RULE 13: IF (target_distance IS mittel) AND (target_speed IS langsamer) AND (speed IS gering) 
+		   THEN powerRatio IS gering, brakeForce IS gering;            
+  RULE 14: IF (target_distance IS mittel) AND (target_speed IS sehrVielLangsamer) AND (speed IS gering) 
+		   THEN powerRatio IS gering, brakeForce IS gering;    
+  RULE 15: IF (target_distance IS mittel) AND (target_speed IS sehrVielLangsamer) AND (speed IS sehrGering) 
+		   THEN powerRatio IS gering, brakeForce IS gering;
+  RULE 16: IF (target_distance IS mittel) AND (target_speed IS sehrVielLangsamer) AND (speed IS hoch) 
+		   THEN powerRatio IS gering, brakeForce IS hoch;        
+  RULE 17: IF (target_distance IS mittel) AND (target_speed IS sehrVielLangsamer) AND (speed IS sehrHoch) 
+		   THEN powerRatio IS gering, brakeForce IS hoch;    
+  RULE 18: IF (target_distance IS mittel) AND (target_speed IS sehrVielSchneller) AND (speed IS sehrGering) 
+		   THEN powerRatio IS mittel;                      
+  RULE 19: IF (target_distance IS mittel) AND (target_speed IS Schneller) AND (speed IS sehrHoch) 
+		   THEN powerRatio IS hoch;                                  
+  RULE 20: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS sehrHoch) 
+		   THEN powerRatio IS hoch;                                     
+  RULE 21: IF (target_distance IS mittel) AND (target_speed IS langsamer) AND (speed IS sehrHoch) 
+		   THEN powerRatio IS gering, brakeForce IS mittel;          
+  RULE 22: IF (target_distance IS gering) 
+		   THEN powerRatio IS gering, brakeForce IS hoch;                                                                                                       
+  RULE 23: IF (target_distance IS mittel) AND (target_speed IS Schneller) AND (speed IS hoch) 
+		   THEN powerRatio IS mittel;                                    
+  RULE 24: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS hoch) 
+		   THEN powerRatio IS mittel;                                       
+  RULE 25: IF (target_distance IS mittel) AND (target_speed IS langsamer) AND (speed IS hoch) 
+		   THEN powerRatio IS gering, brakeForce IS gering;              
+  RULE 26: IF (target_distance IS mittel) AND (target_speed IS Schneller) AND (speed IS sehrGering) 
+		   THEN powerRatio IS hoch;                                
+  RULE 27: IF (target_distance IS mittel) AND (target_speed IS langsamer) AND (speed IS sehrGering) 
+		   THEN powerRatio IS mittel;                              
+  RULE 28: IF (target_distance IS weit) 
+		   THEN powerRatio IS hoch;                                                                                                                               
+  RULE 29: IF (target_distance IS sehrWeit) 
+		   THEN powerRatio IS hoch;                                                                                                                           
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

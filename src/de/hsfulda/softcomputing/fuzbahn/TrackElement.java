@@ -1,6 +1,7 @@
 package de.hsfulda.softcomputing.fuzbahn;
 
-public class TrackElement {
+public class TrackElement
+implements Comparable<TrackElement> {
 
 	/**
 	 * Position of element on its track, value in meters (<= track length). May
@@ -11,7 +12,9 @@ public class TrackElement {
 	/**
 	 * Length of TrackElement. Defaults to 0.
 	 */
-	public double length;
+	private double length;
+	
+	private Track track;
 
 	public TrackElement(double length) {
 		this.length = length;
@@ -35,6 +38,16 @@ public class TrackElement {
 	public double getSpeed() {
 		return 0.0;
 	}
+	public void setTrack(Track t){
+		track = t;
+	}
+	public Track getTrack() {
+		return track;
+	}
+	
+	public String toString(){
+		return getClass() + "[pos=" + getPosition() + ";length=" + getLength() + "speed=" + getSpeed() + "]";
+	}
 
 	/**
 	 * Calculates distance from current TrackElement to e (including e's
@@ -42,6 +55,10 @@ public class TrackElement {
 	 */
 	public double getDistance(TrackElement e) {
 		return e.getLastPosition() - this.getPosition(); 
+	}
+	@Override
+	public int compareTo(TrackElement o) {
+		return (int) (o.getPosition() - getPosition());
 	}
 
 }

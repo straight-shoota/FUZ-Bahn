@@ -37,7 +37,8 @@ public class Train extends TrackElement {
 	 */
 	private double speed = 0;
 	
-	private double acceleration;
+	private double acceleration = 0;
+	
 	
 	public Train(TrainPrototype prototype) {
 		super(prototype.getLength());
@@ -181,7 +182,7 @@ public class Train extends TrackElement {
 
 	public void setPowerRatio(double power) {
 		if(power < -1 || power > 1){
-			throw new IllegalArgumentException("power ratio must be between -100% and +100%");
+			throw new IllegalArgumentException("power ratio must be between -100% and +100%: " + power);
 		}
 		
 		double oldValue = this.powerRatio;
@@ -202,6 +203,9 @@ public class Train extends TrackElement {
 		this.speed = speed;
 		
 		pcs.firePropertyChange(SPEED, oldVal, speed);
+	}
+	public TrackElement getTarget(){
+		return getTrack().nextElement(this);
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

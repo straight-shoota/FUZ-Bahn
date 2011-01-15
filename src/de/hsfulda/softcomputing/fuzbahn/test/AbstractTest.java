@@ -18,29 +18,46 @@ import de.hsfulda.softcomputing.fuzbahn.*;
 
 public abstract class AbstractTest
 extends Thread {
-	static final double DELTA_T = 1;
+	static final double DELTA_T = .1D;
 	
 	private boolean running = true;
 	private double deltaT = DELTA_T;
+	private double simulationScale = .5D;
 	
 	protected Track track;
+	FuzzyController controller;
 	
-	protected void init(){}
+	public AbstractTest(){
+		initModel();
+		initUI();
+	}
+	
+	protected void initModel(){}
+	protected void initUI(){}
 	
 	@Override
 	public void run() {
-		init();
+		runLoop();
+	}
 
+	protected void runLoop() {
 		long sleep = Math.round(deltaT * 1000);
 		
 		while(running) {
-			doStep(deltaT);
+			doStep(deltaT * simulationScale);
 			try {
 				Thread.sleep(sleep);
 			}catch(InterruptedException exc){
 				running = false;
 			}
 		}
+	}
+	
+	public FuzzyController getController() {
+		return controller;
+	}
+	public Track getTrack() {
+		return track;
 	}
 	
 	protected abstract void doStep(double deltaT);
@@ -67,26 +84,25 @@ extends Thread {
 	
 	public void showCharts(FuzzyController fis) {
 		JFrame frame = new JFrame("Fuzzy Test");
-		frame.setSize(1000, 400);
+		frame.setSize(1000, 750);
 		JComponent cp = (JComponent) frame.getContentPane();
 		cp.setLayout(new GridLayout(3,2));
 		
-		for(Variable v : fis.getVariables()){
-			cp.add(new ChartPanel(fis, v));
+		for(FuzzyValue v : fis.getValues().values()){
+			cp.add(new ChartPanel(fis, v.getVariable()));
 		}
 		
 		frame.setVisible(true);
 	}
 	public class ChartPanel
-	extends JComponent 
-	implements ActionListener {
+	extends JComponent  {
 		private JFreeChart chart;
 		FuzzyController controller;
 		
 		public ChartPanel(FuzzyController controller, Variable v) {
 			this.chart = v.chart(false);
 			this.controller = controller;
-			controller.addListener(this);
+			//controller.addListener(this);
 		}
 		public JFreeChart getChart() {
 			return chart;
@@ -102,10 +118,6 @@ extends Thread {
 
 		public void setChart(JFreeChart chart) {
 			this.chart = chart;
-		}
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			repaint();
 		}
 	}
 }

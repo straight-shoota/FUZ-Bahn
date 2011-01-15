@@ -28,7 +28,7 @@ FUZZIFY target_speed
 END_FUZZIFY
 
 FUZZIFY speed
-    TERM gering :=  (0, 0) (10, 1) (20, 1) (30, 0); 
+    TERM gering :=  (20, 1) (30, 0); 
     TERM mittel := (20, 0) (30, 1) (50, 1) (60, 0);
     TERM hoch := (50,0) (60, 1) (80, 1) (90, 0);
     TERM sehrGering := (-50, 0) (-40, 1) (0, 1) (10, 0);
@@ -41,6 +41,7 @@ DEFUZZIFY powerRatio
     TERM hoch := (30, 0) (60, 1) (70, 1) (100, 0);
     TERM sehrHoch := (80, 0) (100, 1) (110, 1) (130, 0);
     METHOD : COG;
+    DEFAULT:= 0;
 END_DEFUZZIFY
 
 DEFUZZIFY brakeForce
@@ -49,11 +50,13 @@ DEFUZZIFY brakeForce
     TERM hoch := (20, 0) (30, 1) (70, 1) (80, 0);
     TERM sehrHoch := (70, 0) (80, 1) (120, 1) (130, 0);
     METHOD : COG;
+    DEFAULT:= 0;
 END_DEFUZZIFY
 
 RULEBLOCK allRules
-  RULE 0: IF (target_distance IS mittel) AND (target_speed IS Schneller) AND (speed IS gering)
-  			THEN  powerRatio IS hoch;
+  AND: MIN;
+  ACCU : MAX;
+  ACT: MIN; 
   RULE 1: IF (target_distance IS sehrGering)  THEN  powerRatio IS gering,brakeForce IS sehrHoch;
   RULE 2: IF (target_distance IS mittel) AND (target_speed IS sehrVielSchneller) AND (speed IS gering) 
 		  THEN  powerRatio IS hoch;   
@@ -76,7 +79,7 @@ RULEBLOCK allRules
   RULE 11: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS sehrGering) 
 		   THEN powerRatio IS mittel;                                 
   RULE 12: IF (target_distance IS mittel) AND (target_speed IS gleich) AND (speed IS gering) 
-  THEN powerRatio IS hoch;                                       
+           THEN powerRatio IS hoch;                                       
   RULE 13: IF (target_distance IS mittel) AND (target_speed IS langsamer) AND (speed IS gering) 
 		   THEN powerRatio IS gering, brakeForce IS gering;            
   RULE 14: IF (target_distance IS mittel) AND (target_speed IS sehrVielLangsamer) AND (speed IS gering) 
@@ -110,7 +113,9 @@ RULEBLOCK allRules
   RULE 28: IF (target_distance IS weit) 
 		   THEN powerRatio IS hoch;                                                                                                                               
   RULE 29: IF (target_distance IS sehrWeit) 
-		   THEN powerRatio IS hoch;                                                                                                                           
+		   THEN powerRatio IS hoch; 
+  RULE 30: IF (target_distance IS mittel) AND (target_speed IS Schneller) AND (speed IS gering)
+  			THEN  powerRatio IS hoch;                                                                                                                          
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

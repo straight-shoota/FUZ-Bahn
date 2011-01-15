@@ -8,19 +8,18 @@ import java.text.Format;
 import javax.swing.event.SwingPropertyChangeSupport;
 
 public class Train extends TrackElement {
-	public static final double G = 9.80665;
+	public static final double G = 9.80665D;
+	public static final double MS_KMH = 3.6D;
 	
 	public static final String SPEED = "speed";
 	public static final String TARGET_DISTANCE = "target_distance";
 	public static final String TARGET_SPEED = "target_speed";
-	public static final String BRAKE_FORCE = "brakeForce";
-	public static final String POWER_RATIO = "powerRatio";
+	public static final String BRAKE_FORCE = "brake";
+	public static final String POWER_RATIO = "power";
 
 	private static final String ACCELERATION = null;
 	
 	private double brakeForce;
-
-	protected PropertyChangeSupport pcs = new SwingPropertyChangeSupport(this, true);
 
 	/**
 	 * Current power of train engine. Valid values are in percent ranging from
@@ -43,14 +42,6 @@ public class Train extends TrackElement {
 	public Train(TrainPrototype prototype) {
 		super(prototype.getLength());
 		this.prototype = prototype;
-	}
-
-	public void addPropertyChangeListener(PropertyChangeListener listener){
-		pcs.addPropertyChangeListener(listener);
-	}
-
-	public void removePropertyChangeListener(PropertyChangeListener listener){
-		pcs.removePropertyChangeListener(listener);
 	}
 
 	/**
@@ -164,20 +155,14 @@ public class Train extends TrackElement {
 	}
 	
 	public void setAcceleration(double a){
-		double oldValue = this.acceleration;
 		this.acceleration = a;
-		
-		pcs.firePropertyChange(ACCELERATION, oldValue, a);
 	}
 
 	public void setBrakeForce(double brakeForce) {
 		if(brakeForce < 0 || brakeForce > 1){
 			throw new IllegalArgumentException("brake force must be between 0% and 100%");
 		}
-		double oldValue = this.brakeForce;
 		this.brakeForce = brakeForce;
-		
-		pcs.firePropertyChange(BRAKE_FORCE, oldValue, this.brakeForce);
 	}
 
 	public void setPowerRatio(double power) {
@@ -185,10 +170,7 @@ public class Train extends TrackElement {
 			throw new IllegalArgumentException("power ratio must be between -100% and +100%: " + power);
 		}
 		
-		double oldValue = this.powerRatio;
 		this.powerRatio = power;
-		
-		pcs.firePropertyChange(POWER_RATIO, oldValue, powerRatio);
 	}
 	
 	public void setPosition(double position){
@@ -199,10 +181,7 @@ public class Train extends TrackElement {
 	 * @param speed the speed to set
 	 */
 	public void setSpeed(double speed) {
-		double oldVal = this.speed;
 		this.speed = speed;
-		
-		pcs.firePropertyChange(SPEED, oldVal, speed);
 	}
 	public TrackElement getTarget(){
 		return getTrack().nextElement(this);

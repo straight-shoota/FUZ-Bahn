@@ -15,6 +15,12 @@ public abstract class SwingTest extends AbstractTest {
 		panel = new FUZPanel(getController(), getTrack());
 		frame.setContentPane(panel);
 		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void startDemo(){
 		frame.setVisible(true);
+		
+		start();
 	}
 }

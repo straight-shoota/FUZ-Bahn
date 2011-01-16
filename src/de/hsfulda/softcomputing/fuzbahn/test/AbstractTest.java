@@ -53,6 +53,20 @@ extends Thread {
 		}
 	}
 	
+	/**
+	 * @return the simulationScale
+	 */
+	public double getSimulationScale() {
+		return simulationScale;
+	}
+
+	/**
+	 * @param simulationScale the simulationScale to set
+	 */
+	public void setSimulationScale(double simulationScale) {
+		this.simulationScale = simulationScale;
+	}
+
 	public FuzzyController getController() {
 		return controller;
 	}
@@ -73,7 +87,7 @@ extends Thread {
 		prototype.setSpeedMax(70/3.6);*/
 		
 		prototype.setName("B");
-		prototype.setBrakeAccelerationMax(-1.0);
+		prototype.setBrakeForceMax(400000);
 		prototype.setLength(40);
 		prototype.setPowerMax(780000);
 		prototype.setPowerMin(-780000);

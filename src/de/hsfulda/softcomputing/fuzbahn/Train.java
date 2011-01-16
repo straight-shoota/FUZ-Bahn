@@ -64,8 +64,8 @@ public class Train extends TrackElement {
 	 * @return
 	 * @see de.hsfulda.softcomputing.fuzbahn.TrainPrototype#getBrakeAccelerationMax()
 	 */
-	public double getBrakeAccelerationMax() {
-		return prototype.getBrakeAccelerationMax();
+	public double getBrakeForceMax() {
+		return prototype.getBrakeForceMax();
 	}
 
 	/**
@@ -173,8 +173,8 @@ public class Train extends TrackElement {
 		this.powerRatio = power;
 	}
 	
-	public void setPosition(double position){
-		this.position = position;
+	public void setPosition(double pos){
+		this.position = pos;
 	}
 	
 	/**
@@ -196,8 +196,11 @@ public class Train extends TrackElement {
 			+ "position=" + f.format(getPosition()) + " m,\t" 
 			+ "speed=" + Math.round(speed * 3.6) + " km/h,\t"
 			+ "acceleration=" + f.format(acceleration) + " m/s²,\t"
-			//+ "brakeForce=" + f.format(brakeForce) 
+			+ "brakeForce=" + f.format(brakeForce) 
 			+ "power=" + Math.round(powerRatio * 100) + "%]";
+	}
+	public String getName(){
+		return "Train (" + prototype.getName() + ")";
 	}
 
 	/**
@@ -216,13 +219,18 @@ public class Train extends TrackElement {
 		if(getPowerRatio() > 0) {
 			accelerationPower = getPowerMax() * getPowerRatio();
 		}else{
-			accelerationPower = getPowerMin() * -getPowerRatio();
+			accelerationPower = getPowerMin() * getPowerRatio() * -1D;
 		}
 		accelerationPower *= getPrototype().getEnergyEfficiency();
 		
 		double totalForce = getRollingResistance() + getDragForce();
 		//System.out.println("force = " + f.format(totalForce) + " N");
-		double totalPower = accelerationPower - totalForce * getSpeed();
+		
+		double brakePower = getBrakeForce() * getBrakeForceMax() * getSpeed();
+		System.out.println("brakePower = " + f.format(brakePower) + " W");
+		double totalPower = accelerationPower - brakePower - totalForce * getSpeed();
+		
+		//System.out.println(f.format(accelerationPower) + " W " + getSpeed() + " m/s");
 
 		//System.out.println("power = " + f.format(totalPower / 1000) + " kW");
 		double kineticEnergy = getMass() * getSpeed() * getSpeed() / 2;
@@ -231,9 +239,20 @@ public class Train extends TrackElement {
 		
 		double newSpeed = Math.sqrt(2 * newEnergy / getMass());
 		
-		double way = (getSpeed() + newSpeed) / 2 * deltaT;
-		setPosition(getPosition() + way);
+		/*if(Double.isNaN(newSpeed)) {
+			newSpeed = getSpeed();
+		}*/
+
+		//System.out.println(kineticEnergy +" :: " + newSpeed + " :: " + totalPower);
+		if(Double.isNaN(newSpeed)){
+			newSpeed = getSpeed()+1;
+		}
 		if(deltaT != 0){
+			double way = (getSpeed() + newSpeed) / 2 * deltaT;
+			System.out.println(way);
+			//if(! Double.isNaN(pos)){
+			setPosition(getPosition() + way);
+			
 			setAcceleration((newSpeed - getSpeed()) / deltaT);
 		}
 		setSpeed(newSpeed);

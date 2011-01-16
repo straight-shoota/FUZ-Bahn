@@ -5,7 +5,7 @@ public class SpeedLimit extends StaticTrackElement {
 	private double speedLimit;
 
 	public SpeedLimit(double position, double speed) {
-		super(0, position);
+		super("Speed Limit: " + speed, 0, position);
 		setSpeed(speed);
 	}
 	

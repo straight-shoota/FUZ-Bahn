@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import de.hsfulda.softcomputing.fuzbahn.*;
@@ -15,10 +17,12 @@ import net.sourceforge.jFuzzyLogic.*;
 import net.sourceforge.jFuzzyLogic.plot.JPanelFis;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
 
-public class FUZPanel extends JPanel {
+public class FUZPanel extends JPanel
+implements TrackPostitionListener {
 	FuzzyController controller;
 	Track track;
-
+	
+	JList tList;
 	VarPanel[] vps;
 	
 	public FUZPanel(FuzzyController c, Track t) {
@@ -38,6 +42,10 @@ public class FUZPanel extends JPanel {
 			varsp.add(vps[i]);
 			i++;
 		}
+		t.addListener(this);
+		tList = new JList(t.getElementsArray());
+		tList.setCellRenderer(new TrackElementCellRenderer());
+		varsp.add(tList);
 		
 		add(varsp, BorderLayout.CENTER);
 	}
@@ -55,5 +63,10 @@ public class FUZPanel extends JPanel {
 	 */
 	public Track getTrack() {
 		return track;
+	}
+
+	@Override
+	public void trackPostitionsUpdated(Track track) {
+		tList.setListData(track.getElementsArray());
 	}
 }

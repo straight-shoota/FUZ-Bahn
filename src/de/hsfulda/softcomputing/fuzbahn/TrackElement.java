@@ -15,20 +15,32 @@ implements Comparable<TrackElement> {
 	private double length;
 	
 	private Track track;
+	
+	private String name;
 
 	public TrackElement(double length) {
+		this("", length);
+		this.name = getClass().getSimpleName();
+	}
+	public TrackElement(String name, double length){
+		this.name = name;
 		this.length = length;
 	}
-	public TrackElement(double length, double position) {
-		this(length);
+	public TrackElement(String name, double length, double position) {
+		this(name, length);
 		this.position = position;
 	}
-	
+	public String getName(){
+		return name;
+	}
 	public double getPosition() {
 		return position;
 	}
 	public double getLastPosition() {
 		return getPosition() - getLength(); 
+	}
+	public double getDistancePosition() {
+		return getLastPosition();
 	}
 
 	public double getLength() {
@@ -54,11 +66,10 @@ implements Comparable<TrackElement> {
 	 * length).
 	 */
 	public double getDistance(TrackElement e) {
-		return e.getLastPosition() - this.getPosition(); 
+		return e.getDistancePosition() - this.getPosition(); 
 	}
 	@Override
 	public int compareTo(TrackElement o) {
 		return (int) (o.getPosition() - getPosition());
 	}
-
 }

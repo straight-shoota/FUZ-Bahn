@@ -6,7 +6,7 @@ public class TrainPrototype {
 	
 	private double energyEfficiency = .8;
 
-	private double brakeAccelerationMax;
+	private double brakeForceMax;
 	
 	private double speedMax;
 	
@@ -92,15 +92,15 @@ public class TrainPrototype {
 	/**
 	 * @return the brakeAccelerationMax
 	 */
-	public double getBrakeAccelerationMax() {
-		return brakeAccelerationMax;
+	public double getBrakeForceMax() {
+		return brakeForceMax;
 	}
 
 	/**
 	 * @param brakeAccelerationMax the brakeAccelerationMax to set
 	 */
-	public void setBrakeAccelerationMax(double brakeAccelerationMax) {
-		this.brakeAccelerationMax = brakeAccelerationMax;
+	public void setBrakeForceMax(double brakeAccelerationMax) {
+		this.brakeForceMax = brakeAccelerationMax;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class TrainPrototype {
 	 */
 	@Override
 	public String toString() {
-		return "TrainPrototype:" + name + " [brakeAccelerationMax=" + brakeAccelerationMax
+		return "TrainPrototype:" + name + " [brakeAccelerationMax=" + brakeForceMax
 				+ ", energyEfficiency=" + energyEfficiency + ", length="
 				+ length + ", mass=" + mass + ", powerMax=" + powerMax
 				+ ", powerMin=" + powerMin + ", speedMax=" + speedMax + "]";

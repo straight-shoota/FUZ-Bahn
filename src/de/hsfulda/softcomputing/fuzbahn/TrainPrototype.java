@@ -3,16 +3,16 @@ package de.hsfulda.softcomputing.fuzbahn;
 public class TrainPrototype {
 	private double powerMax;
 	private double powerMin;
-	
+
 	private double energyEfficiency = .8;
 
 	private double brakeForceMax;
-	
+
 	private double speedMax;
-	
+
 	private double mass;
 	private double length;
-	
+
 	private String name;
 
 	public Train createTrain() {
@@ -27,7 +27,8 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param powerMax the powerMax to set
+	 * @param powerMax
+	 *            the powerMax to set
 	 */
 	public void setPowerMax(double powerMax) {
 		this.powerMax = powerMax;
@@ -41,7 +42,8 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param powerMin the powerMin to set
+	 * @param powerMin
+	 *            the powerMin to set
 	 */
 	public void setPowerMin(double powerMin) {
 		this.powerMin = powerMin;
@@ -55,7 +57,8 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param speedMax the speedMax to set
+	 * @param speedMax
+	 *            the speedMax to set
 	 */
 	public void setSpeedMax(double speedMax) {
 		this.speedMax = speedMax;
@@ -69,7 +72,8 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param mass the mass to set
+	 * @param mass
+	 *            the mass to set
 	 */
 	public void setMass(double mass) {
 		this.mass = mass;
@@ -83,7 +87,8 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param energyEfficiency the energyEfficiency to set
+	 * @param energyEfficiency
+	 *            the energyEfficiency to set
 	 */
 	public void setEnergyEfficiency(double energyEfficiency) {
 		this.energyEfficiency = energyEfficiency;
@@ -97,7 +102,8 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param brakeAccelerationMax the brakeAccelerationMax to set
+	 * @param brakeAccelerationMax
+	 *            the brakeAccelerationMax to set
 	 */
 	public void setBrakeForceMax(double brakeAccelerationMax) {
 		this.brakeForceMax = brakeAccelerationMax;
@@ -111,13 +117,13 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param length the length to set
+	 * @param length
+	 *            the length to set
 	 */
 	public void setLength(double length) {
 		this.length = length;
 	}
 
-	
 	/**
 	 * @return the name
 	 */
@@ -126,22 +132,25 @@ public class TrainPrototype {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "TrainPrototype:" + name + " [brakeAccelerationMax=" + brakeForceMax
-				+ ", energyEfficiency=" + energyEfficiency + ", length="
-				+ length + ", mass=" + mass + ", powerMax=" + powerMax
-				+ ", powerMin=" + powerMin + ", speedMax=" + speedMax + "]";
+		return "TrainPrototype:" + name + " [brakeAccelerationMax="
+				+ brakeForceMax + ", energyEfficiency=" + energyEfficiency
+				+ ", length=" + length + ", mass=" + mass + ", powerMax="
+				+ powerMax + ", powerMin=" + powerMin + ", speedMax="
+				+ speedMax + "]";
 	}
-	
-	
+
 }

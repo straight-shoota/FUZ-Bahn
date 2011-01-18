@@ -10,13 +10,12 @@ public abstract class FuzzyValue {
 	Train train;
 	double min = 0, max = 100;
 	private List<FuzzyValueListener> listeners = new Vector<FuzzyValueListener>();
-	
-	public void setBounds(double min, double max){
+
+	public void setBounds(double min, double max) {
 		setMin(min);
 		setMax(max);
 	}
-	
-	
+
 	/**
 	 * @return the min
 	 */
@@ -24,14 +23,13 @@ public abstract class FuzzyValue {
 		return min;
 	}
 
-
 	/**
-	 * @param min the min to set
+	 * @param min
+	 *            the min to set
 	 */
 	public void setMin(double min) {
 		this.min = min;
 	}
-
 
 	/**
 	 * @return the max
@@ -40,14 +38,13 @@ public abstract class FuzzyValue {
 		return max;
 	}
 
-
 	/**
-	 * @param max the max to set
+	 * @param max
+	 *            the max to set
 	 */
 	public void setMax(double max) {
 		this.max = max;
 	}
-
 
 	/**
 	 * @return the t
@@ -57,76 +54,85 @@ public abstract class FuzzyValue {
 	}
 
 	/**
-	 * @param t the t to set
+	 * @param t
+	 *            the t to set
 	 */
 	public void setTrain(Train t) {
 		this.train = t;
 	}
 
-	public void setVariable(Variable v){
+	public void setVariable(Variable v) {
 		variable = v;
 	}
-	
+
 	public abstract String getName();
-	public boolean isInput(){
+
+	public boolean isInput() {
 		return false;
 	}
-	public boolean isOutput(){
+
+	public boolean isOutput() {
 		return false;
 	}
-	
-	public Variable getVariable(){
+
+	public Variable getVariable() {
 		return variable;
 	}
-	
-	public double getStepSize(){
+
+	public double getStepSize() {
 		return 10D;
 	}
-	
-	public void update(){
+
+	public void update() {
 		_update();
-		
+
 		notifyListeners();
 	}
+
 	protected abstract void _update();
+
 	protected void notifyListeners() {
-		for(FuzzyValueListener l : listeners){
+		for (FuzzyValueListener l : listeners) {
 			l.valueChanged(this);
 		}
 	}
-	
-	public void addListener(FuzzyValueListener l){
+
+	public void addListener(FuzzyValueListener l) {
 		listeners.add(l);
 	}
-	public void removeListener(FuzzyValueListener l){
+
+	public void removeListener(FuzzyValueListener l) {
 		listeners.remove(l);
 	}
-	
-	public static abstract class Input
-	extends FuzzyValue {
-		protected void _update(){
+
+	public static abstract class Input extends FuzzyValue {
+		protected void _update() {
 			variable.setValue(getValue());
 		}
+
 		public abstract double getValue();
-		public boolean isInput(){
+
+		public boolean isInput() {
 			return true;
 		}
 	}
-	public static abstract class Output
-	extends FuzzyValue {
-		protected void _update(){
+
+	public static abstract class Output extends FuzzyValue {
+		protected void _update() {
 			setTrainValue(getValue(variable.getValue()));
 		}
+
 		public abstract double getValue(double d);
+
 		public abstract void setTrainValue(double d);
-		public boolean isOutput(){
+
+		public boolean isOutput() {
 			return true;
 		}
 	}
-	
-	public static class Speed
-	extends FuzzyValue.Input {
-		public Speed(){
+
+	public static class Speed extends FuzzyValue.Input {
+		public Speed() {
 			setBounds(0, 120);
 		}
 
@@ -140,9 +146,9 @@ public abstract class FuzzyValue {
 			return getTrain().getSpeed() * Train.MS_KMH;
 		}
 	}
-	public static class TargetSpeed
-	extends FuzzyValue.Input {
-		public TargetSpeed(){
+
+	public static class TargetSpeed extends FuzzyValue.Input {
+		public TargetSpeed() {
 			setBounds(-120, 120);
 		}
 
@@ -155,22 +161,23 @@ public abstract class FuzzyValue {
 		public double getValue() {
 			TrackElement target = getTrain().getTarget();
 			double tSpeed = Track.SPEED_MAX / Train.MS_KMH;
-			if(target != null){
-				if(getTrain().getDistance(target) <= Track.DISTANCE_MAX){
+			if (target != null) {
+				if (getTrain().getDistance(target) <= Track.DISTANCE_MAX) {
 					tSpeed = target.getSpeed();
-				}else{
+				} else {
 					tSpeed = Track.SPEED_MAX;
 				}
 			}
 			return (tSpeed - getTrain().getSpeed()) * Train.MS_KMH;
 		}
-		public double getStepSize(){
+
+		public double getStepSize() {
 			return 20D;
 		}
 	}
-	public static class TargetDistance
-	extends FuzzyValue.Input {
-		public TargetDistance(){
+
+	public static class TargetDistance extends FuzzyValue.Input {
+		public TargetDistance() {
 			setBounds(0, 1500);
 		}
 
@@ -183,21 +190,22 @@ public abstract class FuzzyValue {
 		public double getValue() {
 			TrackElement target = getTrain().getTarget();
 			double tDistance = Track.DISTANCE_MAX;
-			if(target != null){
+			if (target != null) {
 				tDistance = train.getDistance(target);
 			}
-			if(tDistance < Track.DISTANCE_MAX){
+			if (tDistance < Track.DISTANCE_MAX) {
 				return tDistance;
 			}
 			return Track.DISTANCE_MAX;
 		}
-		public double getStepSize(){
+
+		public double getStepSize() {
 			return 100D;
 		}
 	}
-	public static class Power
-	extends FuzzyValue.Output {
-		public Power(){
+
+	public static class Power extends FuzzyValue.Output {
+		public Power() {
 			setBounds(-100, 100);
 		}
 
@@ -210,17 +218,19 @@ public abstract class FuzzyValue {
 		public double getValue(double d) {
 			return d / 100;
 		}
+
 		@Override
-		public void setTrainValue(double d){
+		public void setTrainValue(double d) {
 			train.setPowerRatio(d);
 		}
-		public double getStepSize(){
+
+		public double getStepSize() {
 			return 20D;
 		}
 	}
-	public static class Brake
-	extends FuzzyValue.Output {
-		public Brake(){
+
+	public static class Brake extends FuzzyValue.Output {
+		public Brake() {
 			setBounds(0, 100);
 		}
 
@@ -233,8 +243,9 @@ public abstract class FuzzyValue {
 		public double getValue(double d) {
 			return d / 100;
 		}
+
 		@Override
-		public void setTrainValue(double d){
+		public void setTrainValue(double d) {
 			train.setBrakeForce(d);
 		}
 	}

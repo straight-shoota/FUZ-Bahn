@@ -1,11 +1,11 @@
 package de.hsfulda.softcomputing.fuzbahn.test;
 
-import de.hsfulda.softcomputing.fuzbahn.*;
+import de.hsfulda.softcomputing.fuzbahn.Track;
+import de.hsfulda.softcomputing.fuzbahn.Train;
 
-public class TestMain
-extends AbstractTest {
+public class TestMain extends AbstractTest {
 	private double power = 1;
-	
+
 	protected void init() {
 		track = new Track(10000);
 		Train t = getDefaultPrototype().createTrain();
@@ -15,7 +15,7 @@ extends AbstractTest {
 		track.add(t);
 		t.update(0);
 	}
-	
+
 	/**
 	 * @param args
 	 */

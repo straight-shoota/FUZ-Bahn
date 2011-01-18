@@ -1,13 +1,13 @@
 package de.hsfulda.softcomputing.fuzbahn.test;
 
-import net.sourceforge.jFuzzyLogic.FunctionBlock;
-import net.sourceforge.jFuzzyLogic.rule.Variable;
-import de.hsfulda.softcomputing.fuzbahn.*;
+import de.hsfulda.softcomputing.fuzbahn.FuzzyController;
+import de.hsfulda.softcomputing.fuzbahn.FuzzyUnavailableException;
+import de.hsfulda.softcomputing.fuzbahn.Track;
+import de.hsfulda.softcomputing.fuzbahn.Train;
 
-public class FuzzyMain
-extends AbstractTest {
-	
-	FuzzyMain(){
+public class FuzzyMain extends AbstractTest {
+
+	FuzzyMain() {
 		track = new Track(10000);
 	}
 
@@ -17,19 +17,19 @@ extends AbstractTest {
 		track.add(t);
 		try {
 			controller = new FuzzyController(t);
-		}catch(FuzzyUnavailableException exc){
+		} catch (FuzzyUnavailableException exc) {
 			exc.printStackTrace();
 		}
 	}
 
 	protected void doStep(double deltaT) {
-		for(Train t : track.getTrains()) {
+		for (Train t : track.getTrains()) {
 			controller.update();
 			t.update(deltaT);
 			System.out.println(t);
 		}
 	}
-	
+
 	/**
 	 * @param args
 	 */

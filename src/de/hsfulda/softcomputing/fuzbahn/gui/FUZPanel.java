@@ -5,42 +5,42 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import de.hsfulda.softcomputing.fuzbahn.*;
+import de.hsfulda.softcomputing.fuzbahn.FuzzyController;
+import de.hsfulda.softcomputing.fuzbahn.FuzzyValue;
+import de.hsfulda.softcomputing.fuzbahn.Track;
+import de.hsfulda.softcomputing.fuzbahn.TrackPostitionListener;
 import de.hsfulda.softcomputing.fuzbahn.test.AbstractTest;
+import de.hsfulda.softcomputing.fuzbahn.test.AbstractTest.SimulationStateListener;
 
-import net.sourceforge.jFuzzyLogic.*;
-import net.sourceforge.jFuzzyLogic.plot.JPanelFis;
-import net.sourceforge.jFuzzyLogic.rule.Variable;
-
-public class FUZPanel extends JPanel implements TrackPostitionListener {
+public class FUZPanel
+extends JPanel
+implements TrackPostitionListener, SimulationStateListener {
 	FuzzyController controller;
 	Track track;
 
-	JList tList;
 	VarPanel[] vps;
 	AbstractTest test;
+	JList tList;
+	JButton startButton, stopButton;
 
 	public FUZPanel(AbstractTest test, FuzzyController c, Track t) {
 		this.track = t;
 		this.controller = c;
 		this.test = test;
+		test.addSimulationStateListener(this);
 
 		setLayout(new BorderLayout());
 
@@ -56,15 +56,28 @@ public class FUZPanel extends JPanel implements TrackPostitionListener {
 			i++;
 		}
 		t.addListener(this);
+		
+		JPanel trackPanel = new JPanel();
+		trackPanel.setLayout(new BorderLayout());
+		
 		tList = new JList(t.getElementsArray());
 		tList.setCellRenderer(new TrackElementCellRenderer());
-		varsp.add(tList);
+		tList.setBorder(BorderFactory.createEtchedBorder());
+		trackPanel.add(tList, BorderLayout.CENTER);
+		
+		trackPanel.add(new JLabel("Positions on track"), BorderLayout.NORTH);
+		
+		varsp.add(trackPanel);
 
 		add(varsp, BorderLayout.CENTER);
 
 		JPanel buttons = new JPanel();
-		buttons.add(new JButton(new StartAction()));
-		buttons.add(new JButton(new StopAction()));
+		startButton = new JButton(new StartAction());
+		stopButton = new JButton(new StopAction());
+		stopButton.setEnabled(false);
+		
+		buttons.add(startButton);
+		buttons.add(stopButton);
 
 		JSlider slider = new JSlider(0, 10, 5);
 		slider.addChangeListener(new ChangeListener() {
@@ -88,6 +101,7 @@ public class FUZPanel extends JPanel implements TrackPostitionListener {
 		slider.setPaintLabels(true);
 
 		buttons.add(slider);
+		buttons.add(new JButton(new ResetAction()));
 
 		add(buttons, BorderLayout.NORTH);
 	}
@@ -135,5 +149,20 @@ public class FUZPanel extends JPanel implements TrackPostitionListener {
 		public void actionPerformed(ActionEvent e) {
 			test.stopDemo();
 		}
+	};
+	class ResetAction extends AbstractAction {
+		public ResetAction() {
+			super("Simulation zurücksetzen");
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			test.reset();
+		}
+	}
+	@Override
+	public void simulationStateChanged(boolean running) {
+		startButton.setEnabled(! running);
+		stopButton.setEnabled(running);
 	};
 }

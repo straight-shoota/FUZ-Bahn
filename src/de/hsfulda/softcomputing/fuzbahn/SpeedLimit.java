@@ -8,8 +8,8 @@ public class SpeedLimit extends StaticTrackElement {
 		super("Speed Limit: " + speed * Train.MS_KMH + " km/h", 0, position);
 		setSpeed(speed);
 	}
-	
-	public void setSpeed(double speed){
+
+	public void setSpeed(double speed) {
 		this.speedLimit = speed;
 	}
 

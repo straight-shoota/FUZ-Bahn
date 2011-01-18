@@ -1,16 +1,12 @@
 package de.hsfulda.softcomputing.fuzbahn;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.text.DecimalFormat;
 import java.text.Format;
-
-import javax.swing.event.SwingPropertyChangeSupport;
 
 public class Train extends TrackElement {
 	public static final double G = 9.80665D;
 	public static final double MS_KMH = 3.6D;
-	
+
 	public static final String SPEED = "speed";
 	public static final String TARGET_DISTANCE = "target_distance";
 	public static final String TARGET_SPEED = "target_speed";
@@ -18,7 +14,7 @@ public class Train extends TrackElement {
 	public static final String POWER_RATIO = "power";
 
 	private static final String ACCELERATION = null;
-	
+
 	private double brakeForce;
 
 	/**
@@ -27,18 +23,17 @@ public class Train extends TrackElement {
 	 * accelerationMax.
 	 */
 	private double powerRatio;
-	
+
 	private TrainPrototype prototype;
-	
+
 	/**
 	 * Current speed of the train, is influenced by acceleration and braking
 	 * power. Values in meters per second (positive only). Defaults to 0.0.
 	 */
 	private double speed = 0;
-	
+
 	private double acceleration = 0;
-	
-	
+
 	public Train(TrainPrototype prototype) {
 		super(prototype.getLength());
 		this.prototype = prototype;
@@ -115,7 +110,7 @@ public class Train extends TrackElement {
 	public double getPowerMax() {
 		return prototype.getPowerMax();
 	}
-	
+
 	/**
 	 * @return
 	 * @see de.hsfulda.softcomputing.fuzbahn.TrainPrototype#getPowerMin()
@@ -123,13 +118,14 @@ public class Train extends TrackElement {
 	public double getPowerMin() {
 		return prototype.getPowerMin();
 	}
+
 	/**
 	 * @return the power
 	 */
 	public double getPowerRatio() {
 		return powerRatio;
 	}
-	
+
 	/**
 	 * @return the prototype
 	 */
@@ -153,106 +149,119 @@ public class Train extends TrackElement {
 	public double getSpeedMax() {
 		return prototype.getSpeedMax();
 	}
-	
-	public void setAcceleration(double a){
+
+	public void setAcceleration(double a) {
 		this.acceleration = a;
 	}
 
 	public void setBrakeForce(double brakeForce) {
-		if(brakeForce < 0 || brakeForce > 1){
-			throw new IllegalArgumentException("brake force must be between 0% and 100%");
+		if (brakeForce < 0 || brakeForce > 1) {
+			throw new IllegalArgumentException(
+					"brake force must be between 0% and 100%: " + brakeForce);
 		}
 		this.brakeForce = brakeForce;
 	}
 
 	public void setPowerRatio(double power) {
-		if(power < -1 || power > 1){
-			throw new IllegalArgumentException("power ratio must be between -100% and +100%: " + power);
+		if (power < -1 || power > 1) {
+			throw new IllegalArgumentException(
+					"power ratio must be between -100% and +100%: " + power);
 		}
-		
+
 		this.powerRatio = power;
 	}
-	
-	public void setPosition(double pos){
+
+	public void setPosition(double pos) {
 		this.position = pos;
 	}
-	
+
 	/**
-	 * @param speed the speed to set
+	 * @param speed
+	 *            the speed to set
 	 */
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
-	public TrackElement getTarget(){
+
+	public TrackElement getTarget() {
 		return getTrack().nextElement(this);
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		Format f = new DecimalFormat("#.#");
-		return "Train (" + prototype.getName() + ") ["
-			+ "position=" + f.format(getPosition()) + " m,\t" 
-			+ "speed=" + Math.round(speed * 3.6) + " km/h,\t"
-			+ "acceleration=" + f.format(acceleration) + " m/s²,\t"
-			+ "brakeForce=" + f.format(brakeForce) 
-			+ "power=" + Math.round(powerRatio * 100) + "%]";
+		return "Train (" + prototype.getName() + ") [" + "position="
+				+ f.format(getPosition()) + " m,\t" + "speed="
+				+ Math.round(speed * 3.6) + " km/h,\t" + "acceleration="
+				+ f.format(acceleration) + " m/s²,\t" + "brakeForce="
+				+ f.format(brakeForce) + "power="
+				+ Math.round(powerRatio * 100) + "%]";
 	}
-	public String getName(){
+
+	public String getName() {
 		return "Train (" + prototype.getName() + ")";
 	}
 
 	/**
 	 * Updates current speed according to current acceleration during one time
 	 * unit.
-	 * @param deltaT length of time unit in seconds
+	 * 
+	 * @param deltaT
+	 *            length of time unit in seconds
 	 */
 	public void update(double deltaT) {
-		if(deltaT < 0){
+		if (deltaT < 0) {
 			throw new IllegalArgumentException("time period must be positive");
 		}
-		
+
 		double accelerationPower;
 		Format f = new DecimalFormat("#.#");
-		
-		if(getPowerRatio() > 0) {
+
+		if (getPowerRatio() > 0) {
 			accelerationPower = getPowerMax() * getPowerRatio();
-		}else{
+		} else {
 			accelerationPower = getPowerMin() * getPowerRatio() * -1D;
 		}
 		accelerationPower *= getPrototype().getEnergyEfficiency();
-		
+
 		double totalForce = getRollingResistance() + getDragForce();
-		//System.out.println("force = " + f.format(totalForce) + " N");
-		
+		// System.out.println("force = " + f.format(totalForce) + " N");
+
 		double brakePower = getBrakeForce() * getBrakeForceMax() * getSpeed();
 		System.out.println("brakePower = " + f.format(brakePower) + " W");
-		double totalPower = accelerationPower - brakePower - totalForce * getSpeed();
-		
-		//System.out.println(f.format(accelerationPower) + " W " + getSpeed() + " m/s");
+		double totalPower = accelerationPower - brakePower - totalForce
+				* getSpeed();
 
-		//System.out.println("power = " + f.format(totalPower / 1000) + " kW");
+		// System.out.println(f.format(accelerationPower) + " W " + getSpeed() +
+		// " m/s");
+
+		// System.out.println("power = " + f.format(totalPower / 1000) + " kW");
 		double kineticEnergy = getMass() * getSpeed() * getSpeed() / 2;
-		
-		double newEnergy = kineticEnergy + deltaT * totalPower;
-		
-		double newSpeed = Math.sqrt(2 * newEnergy / getMass());
-		
-		/*if(Double.isNaN(newSpeed)) {
-			newSpeed = getSpeed();
-		}*/
 
-		//System.out.println(kineticEnergy +" :: " + newSpeed + " :: " + totalPower);
-		if(Double.isNaN(newSpeed)){
-			newSpeed = getSpeed()+1;
+		double newEnergy = kineticEnergy + deltaT * totalPower;
+
+		double newSpeed = Math.sqrt(2 * newEnergy / getMass());
+
+		/*
+		 * if(Double.isNaN(newSpeed)) { newSpeed = getSpeed(); }
+		 */
+
+		// System.out.println(kineticEnergy +" :: " + newSpeed + " :: " +
+		// totalPower);
+		if (Double.isNaN(newSpeed)) {
+			newSpeed = getSpeed() + 1;
 		}
-		if(deltaT != 0){
+		if (deltaT != 0) {
 			double way = (getSpeed() + newSpeed) / 2 * deltaT;
 			System.out.println(way);
-			//if(! Double.isNaN(pos)){
+			// if(! Double.isNaN(pos)){
 			setPosition(getPosition() + way);
-			
+
 			setAcceleration((newSpeed - getSpeed()) / deltaT);
 		}
 		setSpeed(newSpeed);
@@ -264,6 +273,7 @@ public class Train extends TrackElement {
 		double cw = 0.8;
 		return pLuft / 2 * cw * A * getSpeed() * getSpeed();
 	}
+
 	protected double getRollingResistance() {
 		double cr = 0.0015;
 		return cr * getMass() * G;

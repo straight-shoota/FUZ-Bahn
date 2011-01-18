@@ -12,16 +12,18 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY target_distance
-    TERM small	:= (0,1) (40,1) (60, 0);
-    TERM medium := (0,0) (40,0) (60,1) (120,1) (200,0);
-    TERM far	:= (100,0) (150,1) (1500, 1);
+    TERM very_small	:= (0,1) (20,1) (30, 0);
+    TERM small		:= (10,0) (20,1) (40,1) (60, 0);
+    TERM little 	:= (40,0) (60,1) (100,1) (120,0);
+    TERM medium 	:= (100,0) (120,1) (260,1) (280,0);
+    TERM far		:= (200,0) (280,1) (1500, 1);
 END_FUZZIFY
 
 FUZZIFY target_speed
 	TERM slower 		:= (-80, 1) (-10, 1) 	(-4,0);
-	TERM little_slower 	:= (-6, 0)	(-5, 1) 	(-1, 1)	(0,0);
+	TERM little_slower 	:= (-6, 0)	(-5, 1) 	(0, 1)	(0,0);
     TERM equal			:= (-10, 0) (-2, 1) 	(2, 1) 	(10, 0);
-    TERM little_faster 	:= (0, 0) 	(1, 1) 		(5, 1) 	(6,0);
+    TERM little_faster 	:= (0, 0) 	(0, 1) 		(5, 1) 	(6,0);
     TERM faster			:= (4, 0) 	(10,1) 		(80, 1);
 END_FUZZIFY
 
@@ -48,7 +50,7 @@ END_DEFUZZIFY
 
 DEFUZZIFY brake
 	TERM none	:= (0, 1) (1, 0);
-    TERM little	:= (0, 0) (1, 1) (5, 1) (10, 0);
+    TERM little	:= (-10, 0) (-5, 1) (5, 1) (10, 0);
     TERM medium	:= (5, 0) (10, 1) (20, 1) (30, 0);
     TERM full	:= (30, 0) (50, 1) (150, 1) (170, 0);
     METHOD : COG;
@@ -56,12 +58,22 @@ DEFUZZIFY brake
 END_DEFUZZIFY
 
 RULEBLOCK allRules
-	RULE 1: IF target_speed IS faster AND speed IS NOT very_slow THEN power IS fasten_max;
+	AND : MIN;
+	ACCU: MAX;
+	
+	RULE 1: IF target_speed IS faster AND speed IS NOT very_slow AND speed IS NOT too_fast THEN power IS fasten_max;
 	RULE 2: IF speed IS too_fast THEN power IS slow_little;
-	RULE 4: IF target_speed IS equal THEN power IS zero;
-	RULE 3: IF target_speed IS slower THEN power IS slow_little;
+	RULE 4: IF target_speed IS equal AND target_distance IS small AND speed IS NOT still THEN power IS zero;
+	RULE 3: IF target_distance IS medium AND target_speed IS slower THEN power IS slow_little;
 	RULE 5: IF target_speed IS faster AND speed IS very_slow THEN power IS fasten_little;
-	RULE 5: IF target_speed IS faster AND speed IS slow THEN power IS fasten_medium;
+	RULE 6: IF target_speed IS faster AND speed IS slow THEN power IS fasten_medium;
+	RULE 7: IF target_distance IS far AND speed IS NOT too_fast THEN power IS fasten_max; 
+	RULE 8: IF target_distance IS medium AND target_speed IS slower THEN power IS slow_max, brake IS little;
+	RULE 9: IF target_distance IS very_small AND target_speed IS slower THEN power IS slow_max, brake IS medium;
+	RULE 10: IF target_distance IS medium AND target_speed IS little_slower THEN power IS fasten_medium, brake IS none;
+	RULE 11: IF target_distance IS NOT very_small AND speed IS still THEN power IS fasten_medium; 
+	RULE 12: IF target_distance IS NOT very_small AND speed IS slow THEN power IS fasten_medium;
+	RULE 13: IF target_distance IS very_small AND target_speed IS equal THEN power IS zero, brake IS little;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

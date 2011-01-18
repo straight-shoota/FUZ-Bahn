@@ -60,7 +60,6 @@ public abstract class AbstractTest implements Runnable {
 		}
 	}
 
-	
 	/**
 	 * @param running the running to set
 	 */

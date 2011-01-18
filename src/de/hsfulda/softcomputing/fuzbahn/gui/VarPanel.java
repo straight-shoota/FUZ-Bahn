@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -15,6 +17,8 @@ import org.jfree.chart.plot.dial.*;
 import org.jfree.chart.plot.dial.DialPointer.Pointer;
 import org.jfree.chart.plot.*;
 import org.jfree.data.general.DefaultValueDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
 
@@ -28,6 +32,7 @@ implements FuzzyValueListener
 {
 	FuzzyValue value;
 	DefaultValueDataset data;
+	ChartPanel chartPanel;
 
 	public VarPanel(FuzzyValue v){
 		this.value = v;
@@ -35,14 +40,16 @@ implements FuzzyValueListener
 		
 		setLayout(new BorderLayout());
 
-		ChartPanel panel = new ChartPanel(getVariable().chart(false));
-		add(panel, BorderLayout.CENTER);
+		chartPanel = new ChartPanel(getVariable().chart(false));
+		add(chartPanel, BorderLayout.CENTER);
 		
 		data = new DefaultValueDataset(getVariable().getValue());
 		
 		ChartPanel var = new ChartPanel(createDialChart());
-		var.setPreferredSize(new Dimension(200, 200));
-		add(var, BorderLayout.EAST);
+		var.setPreferredSize(new Dimension(160, 160));
+		JPanel p = new JPanel();
+		p.add(var);
+		add(p, BorderLayout.EAST);
 	}
 	public Variable getVariable(){
 		return getValue().getVariable();
@@ -111,6 +118,9 @@ implements FuzzyValueListener
 	@Override
 	public void valueChanged(FuzzyValue f) {
 		data.setValue(value.getVariable().getValue());
+		
+		chartPanel.setChart(getVariable().chart(false));
+		
 		repaint();
 	}
 }

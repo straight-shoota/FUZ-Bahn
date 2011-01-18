@@ -2,6 +2,7 @@ package de.hsfulda.softcomputing.fuzbahn.test;
 
 import de.hsfulda.softcomputing.fuzbahn.FuzzyController;
 import de.hsfulda.softcomputing.fuzbahn.FuzzyUnavailableException;
+import de.hsfulda.softcomputing.fuzbahn.SpeedLimit;
 import de.hsfulda.softcomputing.fuzbahn.Station;
 import de.hsfulda.softcomputing.fuzbahn.Track;
 import de.hsfulda.softcomputing.fuzbahn.Train;
@@ -14,6 +15,7 @@ public class SwingMain extends SwingTest {
 		t.update(0);
 		track.add(t);
 		track.add(new Station("TestHalt1", 120, 100));
+		//track.add(new SpeedLimit(400, 50 / Train.MS_KMH));
 		try {
 			controller = new FuzzyController(t);
 		}catch(FuzzyUnavailableException exc){
@@ -21,17 +23,8 @@ public class SwingMain extends SwingTest {
 		}
 		setSimulationScale(1D);
 	}
-
-	protected void doStep(double deltaT) {
-		for(Train t : track.getTrains()) {
-			controller.update();
-			t.update(deltaT);
-		}
-		track.updateElements();
-	}
 	
 	public static void main(String[] args) {
-		new SwingMain().startDemo();
+		new SwingMain();
 	}
-
 }

@@ -17,12 +17,14 @@ import net.sourceforge.jFuzzyLogic.rule.Variable;
 import de.hsfulda.softcomputing.fuzbahn.*;
 
 public abstract class AbstractTest
-extends Thread {
+implements Runnable {
 	static final double DELTA_T = .1D;
 	
 	private boolean running = true;
 	private double deltaT = DELTA_T;
 	private double simulationScale = .5D;
+	
+	private Thread thread;
 	
 	protected Track track;
 	FuzzyController controller;
@@ -37,10 +39,6 @@ extends Thread {
 	
 	@Override
 	public void run() {
-		runLoop();
-	}
-
-	protected void runLoop() {
 		long sleep = Math.round(deltaT * 1000);
 		
 		while(running) {
@@ -49,8 +47,23 @@ extends Thread {
 				Thread.sleep(sleep);
 			}catch(InterruptedException exc){
 				running = false;
+				break;
 			}
 		}
+	}
+	public void startDemo(){
+		running = true;
+		if(thread == null){
+			thread = new Thread(this);
+			thread.start();
+		}
+	}
+	public void stopDemo(){
+		running = false;
+		thread = null;
+	}
+	public boolean isRunning(){
+		return running;
 	}
 	
 	/**
@@ -73,8 +86,14 @@ extends Thread {
 	public Track getTrack() {
 		return track;
 	}
-	
-	protected abstract void doStep(double deltaT);
+
+	protected void doStep(double deltaT) {
+		controller.update();
+		for(Train t : track.getTrains()) {
+			t.update(deltaT);
+		}
+		track.updateElements();
+	}
 	
 	protected TrainPrototype getDefaultPrototype() {
 		TrainPrototype prototype = new TrainPrototype();

@@ -4,30 +4,22 @@ import de.hsfulda.softcomputing.fuzbahn.*;
 
 public class TestMain
 extends AbstractTest {
-	private Train t;
 	private double power = 1;
 	
 	protected void init() {
-		t = getDefaultPrototype().createTrain();
-		
+		track = new Track(10000);
+		Train t = getDefaultPrototype().createTrain();
 		t.setPowerRatio(power);
-		t.setSpeed(3);
-
+		t.setSpeed(0);
 		t.update(0);
-		
-		trains = new Train[]{t};
-	}
-	protected void doStep(double deltaT) {
-		for(Train t : trains) {
-			t.update(deltaT);
-			System.out.println(t);
-		}
+		track.add(t);
+		t.update(0);
 	}
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new TestMain().start();
+		new TestMain().startDemo();
 	}
 }

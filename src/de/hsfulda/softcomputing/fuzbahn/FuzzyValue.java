@@ -154,10 +154,15 @@ public abstract class FuzzyValue {
 		@Override
 		public double getValue() {
 			TrackElement target = getTrain().getTarget();
-			if(target == null){
-				return 80 - getTrain().getSpeed() * Train.MS_KMH;
+			double tSpeed = Track.SPEED_MAX / Train.MS_KMH;
+			if(target != null){
+				if(getTrain().getDistance(target) <= Track.DISTANCE_MAX){
+					tSpeed = target.getSpeed();
+				}else{
+					tSpeed = Track.SPEED_MAX;
+				}
 			}
-			return (target.getSpeed() - getTrain().getSpeed()) * Train.MS_KMH;
+			return (tSpeed - getTrain().getSpeed()) * Train.MS_KMH;
 		}
 		public double getStepSize(){
 			return 20D;
@@ -177,11 +182,14 @@ public abstract class FuzzyValue {
 		@Override
 		public double getValue() {
 			TrackElement target = getTrain().getTarget();
-			double tDistance = 1500;
+			double tDistance = Track.DISTANCE_MAX;
 			if(target != null){
 				tDistance = train.getDistance(target);
 			}
-			return tDistance;
+			if(tDistance < Track.DISTANCE_MAX){
+				return tDistance;
+			}
+			return Track.DISTANCE_MAX;
 		}
 		public double getStepSize(){
 			return 100D;

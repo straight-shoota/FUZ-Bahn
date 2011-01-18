@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="fis"/>
 	<classpathentry kind="lib" path="lib/jFuzzyLogic_2.0.8.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="fcl"/>
+	<classpathentry kind="lib" path="D:/DEV/JAVA/lib/jcommon-1.0.16.jar"/>
+	<classpathentry kind="lib" path="D:/DEV/JAVA/lib/jfreechart-1.0.13.jar"/>
 	<classpathentry kind="output" path="class"/>
 </classpath>

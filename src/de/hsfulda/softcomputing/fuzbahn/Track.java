@@ -4,7 +4,8 @@ import java.util.*;
 
 public class Track 
 implements Iterable<TrackElement>{
-
+	public static double DISTANCE_MAX = 1500D;
+	public static double SPEED_MAX = 22.2D;
 	/**
 	 * real length of track (in meters)
 	 */

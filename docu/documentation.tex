@@ -68,6 +68,8 @@ Zusätzlich zur eigentlichen Projektaufgabe haben wir uns zudem als Ziel gesetzt
 
 Um das Projekt überschaubar zu halten, beschränkten wir unser Szenario auf den ganz einfachen Fall eines linearen, ebenen Streckenverlaufs ohne Abzweigungen oder sonstige andersgeartete Einflüsse. Auf dieser Strecke können sich einzig Hindernisse wie Haltestellen, vorausfahrende Züge oder Geschwindigkeitsbegrenzungen befinden. Das Fahrzeug sollte nur in der Lage sein, vorwärts zu fahren, sowie Beschleunigungs-- und Bremsvorgänge auszuführen. Ein Fahrtrichtungswechsel ist nicht vorgesehen.
 
+\subsection{Fuzzy-Regler}
+
 \subsubsection{Eingangsvariablen}
 \paragraph{}
 Als Eingangsvariablen wählten wir zunächst die einfachen Fahrzeugparameter der aktuellen Geschwindigkeit sowie die Entfernung zum nächsten Hindernis. Diese Variablen allein würden schon genügen, um ein einfaches Stop-and-Go-Verhalten zu erreichen, bei dem das Fahrzeug an jedem Punkt auf seinem Weg anhält um dann ggf. wieder neu anzufahren.
@@ -78,6 +80,8 @@ Die Verarbeitung der konkreten Geschwindigkeit des Zielobjekts im Regler würde 
 Die aktuelle Geschwindigkeit beträgt mindestens $ 0\, km/h $. Als zulässige Streckenhöchstgeschwindigkeit legten wir U-Bahn-typische $ 80\, km/h $ fest, um auch leichte Überläufe erlauben zu können, vergrößerten wir den Wertebereich allerdings noch um ein gutes Stück auf $ 120\, km/h $.
 \subparagraph{}
 Den Wertebereich für die Entfernung des Ziels legten wir fest auf den Bereich von $ 0 - 1500 \, m $ wodurch ein genügend weiter Ausblick auf die vor dem Zug liegende Strecke gewährleistet ist.
+\subparagraph{}
+Analog zur aktuellen Geschwindigkeit liegt die Geschwindigkeitsdifferenz zwischen der Höchstgeschwindigkeit und dem betragsgleichen negativen Wert.
 
 \subsubsection{Ausgangsvariablen}
 Auf die Geschwindigkeit beziehungsweise die Beschleunigungsvorgänge eines elektrisch betriebenen Schienenfahrzeugs haben zwei Komponenten wesentlichen Einfluss: Der Fahrmotor sowie die Betriebsbremse (Druckluftbremse). Zum Beschleunigen wird die Leistung des Fahrmotors erhöht, wodurch elektrische Energie in Bewegungsenergie umgesetzt wird. Um eine Geschwindigkeit beizubehalten (Nullbeschleunigung) genügt es, den Fahrmotor für eine geringe Leistungsabgabe anzusteuern, da lediglich die durch die Bewegung verlorene Reibungsverluste ausgeglichen werden müssen. Wenn der Motor in den Leerlauf schaltet, sinkt die Geschwindigkeit kontinuierlich ab.
@@ -86,6 +90,9 @@ Beim Bremsen (negative Beschleunigung) wirkt einerseits die Betriebsbremse, die 
 \paragraph{}
 Zudem kommt beim Bremsen eine Besonderheit des Elektromotors zum Tragen: Die elektrische Bremswirkung, die eintritt, wenn ein Elektromotor in den Generatorbetrieb umgeschaltet wird. Dieser Vorteil einer stufenlosen und verschleißarmen Bremswirkung wird in der Praxis bei allen elektrischen Triebfahrzeugen eingesetzt, erreicht allerdings keine so starke Bremsbeschleunigung wir eine mechanische Bremse, weshalb diese stets zusätzlich vorhanden sein muss und bei stärkeren Bremsvorgängen additiv zugeschaltet wird.
 Auf in der Praxis oftmals zusätzlich verwendete weitere Bremssysteme wurde im Zuge der Vereinfachung verzichtet.
+
+\paragraph{Wertebereiche}
+Als Wertebereiche verwendeten wir für die Motorsteuerung den Bereich $ -100 $ und $ +100 $ während die Bremsstärke zwischen $ 0 $ und $ 100 $ liegt.
 
 \paragraph{}
 Damit waren die Projektvorgaben (siehe \ref{projektvorgaben}) erfüllt.

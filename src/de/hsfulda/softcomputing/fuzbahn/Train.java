@@ -13,8 +13,6 @@ public class Train extends TrackElement {
 	public static final String BRAKE_FORCE = "brake";
 	public static final String POWER_RATIO = "power";
 
-	private static final String ACCELERATION = null;
-
 	private double brakeForce;
 
 	/**

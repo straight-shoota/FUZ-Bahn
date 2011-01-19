@@ -12,19 +12,9 @@ import net.sourceforge.jFuzzyLogic.rule.Variable;
 public class FuzzyController {
 	private FIS fis;
 	private Train train;
-	private Variable speed;
-	private Variable targetDistance;
-	private Variable targetSpeed;
-
-	/*
-	 * Output variables
-	 */
-	private Variable powerRatio;
-	private Variable brakeForce;
 
 	private Map<String, FuzzyValue> values;
-	private List<ActionListener> listeners = new ArrayList<ActionListener>();
-
+	
 	public FuzzyController(Train train) throws FuzzyUnavailableException {
 		// this(train, "/fcl/Fuzzy-Project.fcl");
 		this(train, "/fuz-controller.fcl");
@@ -53,9 +43,6 @@ public class FuzzyController {
 		this.values.put(f.getName(), f);
 	}
 
-	/*
-	 * public Variable[] getVariables() { return variables; }
-	 */
 	public Map<String, FuzzyValue> getValues() {
 		return values;
 	}
@@ -78,19 +65,5 @@ public class FuzzyController {
 				v.update();
 			}
 		}
-
-		// System.out.println("speed=" + speed.getValue() + ",distance=" +
-		// targetDistance.getValue() + ",tSpeed=" + targetSpeed.getValue());
-		// System.out.println("power=" + powerRatio.getValue() + ",brake=" +
-		// brakeForce.getValue());
-
-		/*
-		 * ActionEvent e = new ActionEvent(this, 0, "fuzzy"); for(ActionListener
-		 * l : this.listeners){ l.actionPerformed(e); }
-		 */
 	}
-	/*
-	 * public void addListener(ActionListener l){ this.listeners.add(l); }
-	 * public void removeListener(ActionListener l){ this.listeners.remove(l); }
-	 */
 }

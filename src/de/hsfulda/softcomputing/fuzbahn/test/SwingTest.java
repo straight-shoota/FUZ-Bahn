@@ -14,20 +14,32 @@ public abstract class SwingTest extends AbstractTest {
 	JFrame frame;
 	FUZPanel panel;
 	Train t;
+	Train t2;
+	FuzzyController controller2; 
 	
 	public void initModel() {
 		track = new Track(10000);
 		t = getDefaultPrototype().createTrain();
+		t2 = getDefaultPrototype().createTrain();
+		t2.setPosition(100);
+		t2.update(0);
 		t.update(0);
 		track.add(t);
-		track.add(new Station("TestHalt1", 120, 100));
+		track.add(t2);
+		//track.add(new Station("TestHalt1", 120, 100));
 		track.add(new SpeedLimit(600, 50 / Train.MS_KMH));
 		try {
 			controller = new FuzzyController(t);
+			controller2 = new FuzzyController(t2);
 		} catch (FuzzyUnavailableException exc) {
 			exc.printStackTrace();
 		}
 		setSimulationScale(1D);
+	}
+	@Override
+	protected void doStep(double deltaT) {
+		controller2.update();
+		super.doStep(deltaT);
 	}
 
 	public void initUI() {

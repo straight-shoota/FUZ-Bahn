@@ -18,7 +18,6 @@ public class Track implements Iterable<TrackElement> {
 	private NavigableSet<TrackElement> elements;
 	private List<Train> trains;
 
-	private TrackElement fin;
 
 	private List<TrackPostitionListener> listeners = new Vector<TrackPostitionListener>();
 
@@ -28,7 +27,7 @@ public class Track implements Iterable<TrackElement> {
 
 		setLength(length);
 
-		fin = new Fin();
+		//fin = new Fin();
 	}
 
 	/**

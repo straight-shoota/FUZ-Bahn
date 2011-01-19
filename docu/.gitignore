@@ -1,1 +1,12 @@
-*.aux\n*.idx\n*.gz\n*.toc\nresources.txt
+*.aux
+*.idx
+*.gz
+*.ilg
+*.ind
+*.lof
+*.lot
+*.out
+*.toc
+*.log
+resources.txt
+.gitignore

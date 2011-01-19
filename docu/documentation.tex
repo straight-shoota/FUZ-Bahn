@@ -4,8 +4,12 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{hyperref}
+
+
 \graphicspath{{img//}}
-\pagestyle{headings}
+
+%\pagestyle{headings}
 
 \author{Antonia Wagner \and Daniel Buth \and Johannes Müller \\ \\
 Fachbereich Angewandte Informatik der Hochschule Fulda\\ \\
@@ -21,15 +25,21 @@ Betreuer: Lukas Militz
 \begin{document}
 
 \maketitle
+\includegraphics[scale=.3]{ubahnlogo}
+
+\newpage 
+
 \tableofcontents
+\begin{abstract}
+\end{abstract}
+
+\newpage 
 
 \section{Projektrahmen}
 \subsection{Aufgabenstellung}
-\begin{abstract}
 Unsere Aufgabenstellung war es, im Rahmen des Praktikums zur Lehrveranstaltung \textit{Soft Computing} bei Prof. Dr. Oleg Taraszow einen Fuzzy-Regler zu erstellen.
 Als Werkzeug stand uns dazu die \textit{Fuzzy-Toolbox} der Software \textit{Matlab} zur Verfügung.
 Optionale Bonusaufgabe war die Erstellung eines Java-Applets zur Visualisierung.
-\end{abstract}
 
 \begin{figure}[htb]
 \begin{itemize}
@@ -51,7 +61,12 @@ Eine der ersten größere Anwendungen eines Fuzzy-Reglers in der Praxis die auto
 \includegraphics[width=.8\textwidth]{Sendai_subway_1014_20081021.jpg}
 \caption[Sendai Subway]{Sendai Subway}
 \label{Sendai Subway}
-\footnote{Quelle: Wikimedia Commons}
+
+\begin{footnotesize}
+Quelle: Wikimedia Commons, hochgeladen von Benutzer Jet-0
+\url{http://commons.wikimedia.org/wiki/File:Sendai_subway_1014_20081021.jpg}
+\end{footnotesize}
+
 \end{center}
 \end{figure}
 
@@ -81,7 +96,7 @@ Die aktuelle Geschwindigkeit beträgt mindestens $ 0\, km/h $. Als zulässige St
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=.5\textwidth]{var_speed.png}
+\includegraphics[width=\textwidth]{var_speed.png}
 \caption[Eingangsvariable Geschwindigkeit]{Terme der Eingangsvariable Geschwindigkeit}
 \label{var_speed}
 \end{center}
@@ -91,7 +106,7 @@ Den Wertebereich für die Entfernung des Ziels legten wir fest auf den Bereich v
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=.5\textwidth]{var_target_distance.png}
+\includegraphics[width=\textwidth]{var_target_distance.png}
 \caption[Eingangsvariable Zielentfernung]{Terme der Eingangsvariable Zielentfernung}
 \label{var_target_distance}
 \end{center}
@@ -101,7 +116,7 @@ Analog zur aktuellen Geschwindigkeit liegt die Geschwindigkeitsdifferenz zwische
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=.5\textwidth]{var_target_speed.png}
+\includegraphics[width=\textwidth]{var_target_speed.png}
 \caption[Eingangsvariable Geschwindigkeitsdifferenz]{Terme der Eingangsvariable Geschwindigkeitsdifferenz}
 \label{var_target_speed}
 \end{center}
@@ -111,17 +126,32 @@ Analog zur aktuellen Geschwindigkeit liegt die Geschwindigkeitsdifferenz zwische
 Auf die Geschwindigkeit beziehungsweise die Beschleunigungsvorgänge eines elektrisch betriebenen Schienenfahrzeugs haben zwei Komponenten wesentlichen Einfluss: Der Fahrmotor sowie die Betriebsbremse (Druckluftbremse).
 \paragraph{Zum Beschleunigen} wird die Leistung des Fahrmotors erhöht, wodurch elektrische Energie in Bewegungsenergie umgesetzt wird. Um eine Geschwindigkeit beizubehalten (Nullbeschleunigung) genügt es, den Fahrmotor für eine geringe Leistungsabgabe anzusteuern, da lediglich die durch die Bewegung verlorene Reibungsverluste ausgeglichen werden müssen. Wenn der Motor in den Leerlauf schaltet, sinkt die Geschwindigkeit kontinuierlich ab.
 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\textwidth]{var_power.png}
+\caption[Ausgangsvariable Motorleistung]{Terme der Ausgangsvariable Motorleistung}
+\label{var_power}
+\end{center}
+\end{figure}
+
 \paragraph{Beim Bremsen} (negative Beschleunigung) wirkt einerseits die Betriebsbremse, die je nach gewünschter Bremsstärke durch druckluftbetriebene Bremszylinder eine Bremskraft auf die Radachsen bewirkt. Im Regelbetrieb wird die zur Verfügung stehende Bremskraft nur zu einem Bruchteil beansprucht, volle Leistung wird nur bei einer Notbremsung abgerufen.
-\newline 
-\newline
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\textwidth]{var_brake.png}
+\caption[Ausgangsvariable Bremsstärke]{Terme der Ausgangsvariable Bremsstärke}
+\label{var_brake}
+\end{center}
+\end{figure}
+
 Zudem kommt beim Bremsen eine Besonderheit des Elektromotors zum Tragen: Die elektrische Bremswirkung, die eintritt, wenn ein Elektromotor in den Generatorbetrieb umgeschaltet wird. Dieser Vorteil einer stufenlosen und verschleißarmen Bremswirkung wird in der Praxis bei nahezu allen elektrischen Triebfahrzeugen eingesetzt, erreicht allerdings keine so starke Bremsbeschleunigung wir eine mechanische Bremse, weshalb diese stets zusätzlich vorhanden sein muss und bei stärkeren Bremsvorgängen additiv zugeschaltet wird.
 Auf in der Praxis oftmals zusätzlich verwendete weitere Bremssysteme wurde im Zuge der Vereinfachung verzichtet.
 
 \paragraph{Wertebereiche}
 Als Wertebereiche verwendeten wir für die Motorsteuerung den Bereich $ -100 \% $ und $ +100 \% $ während die Bremsstärke zwischen $ 0 \% $ und $ 100 \% $ liegt.
 
-\paragraph{}
-Damit waren die Projektvorgaben (siehe \ref{projektvorgaben}) erfüllt.
+%\paragraph{}
+Damit waren die Projektvorgaben (siehe \hyperref[projektvorgaben]{Figure \ref*{projektvorgaben}}) erfüllt.
 
 \section{Umsetzung}
 
@@ -138,7 +168,7 @@ E_{kin} = \frac{1}{2} m v^{2}
 \bigtriangleup E = \bigtriangleup t \ast \bigtriangleup E
 \end{equation}
 
-\paragraph{Betrachtung bezogen auf die Zeit}
+\paragraph{Geschwindigkeit abhängig von Zeit und Energieveränderung}
 \begin{equation}
 E_{kin}(t_{1}) = E_{kin}(t_{2}) + \bigtriangleup t \ast P_{eff}
 \end{equation}
@@ -179,9 +209,9 @@ P_{eff} = \sum W * v
 \end{equation}
 
 \subsubsection{Fahrzeugparameter}
-Um die Berechnungen mit realistischen Werten durchführen zu können, erhielt unser Testfahrzeug typische Fahreigenschaften eines U-Bahn-Fahrzeugs. Insbesondere lehnten wir uns an die \textit{Baureihe B} der U-Bahn München und die \textit{Baureihe H} der U-Bahn Berlin an.
+Um die Berechnungen mit realistischen Werten durchführen zu können, erhielt unser Testfahrzeug typische Fahreigenschaften eines U-Bahn-Fahrzeugs. Insbesondere lehnten wir uns an die \textit{Baureihe B} der U-Bahn München, die bei der U-Bahn Nürnberg als Dt2 auch im Mischbetrieb mit automatisch gesteuerten Triebfahrzeugen verkehrt, und die \textit{Baureihe H} der U-Bahn Berlin an.
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
 \begin{tabular}{|lr|}
 \hline \textbf{Eigenschaft} & \textbf{Wert} \\ 
@@ -198,5 +228,5 @@ Um die Berechnungen mit realistischen Werten durchführen zu können, erhielt un
 \end{figure}
 
 \section{Zusammenfassung}
-
+ 
 \end{document}

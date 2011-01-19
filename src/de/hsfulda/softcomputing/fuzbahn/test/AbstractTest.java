@@ -47,7 +47,7 @@ public abstract class AbstractTest implements Runnable {
 
 	@Override
 	public void run() {
-		long sleep = Math.round(deltaT * 1000);
+		long sleep = Math.round(deltaT * 1000D);
 
 		while (running) {
 			doStep(deltaT * simulationScale);
@@ -93,10 +93,10 @@ public abstract class AbstractTest implements Runnable {
 	}
 	protected void setInitValues(){
 		for(Train e : track.getTrains()){
-			e.setPosition(0);
-			e.setSpeed(0);
-			e.setPowerRatio(0);
-			e.setBrakeForce(0);
+			e.setPosition(0D);
+			e.setSpeed(0D);
+			e.setPowerRatio(0D);
+			e.setBrakeForce(0D);
 		}
 	}
 
@@ -141,12 +141,12 @@ public abstract class AbstractTest implements Runnable {
 		 */
 
 		prototype.setName("B");
-		prototype.setBrakeForceMax(400000);
-		prototype.setLength(40);
-		prototype.setPowerMax(780000);
-		prototype.setPowerMin(-780000);
-		prototype.setMass(80000);
-		prototype.setSpeedMax(80 / 3.6);
+		prototype.setBrakeForceMax(100000D);
+		prototype.setLength(40D);
+		prototype.setPowerMax(780000D);
+		prototype.setPowerMin(-780000D);
+		prototype.setMass(80000D);
+		prototype.setSpeedMax(22.2D);
 		return prototype;
 	}
 

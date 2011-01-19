@@ -233,7 +233,7 @@ public class Train extends TrackElement {
 		// System.out.println("force = " + f.format(totalForce) + " N");
 
 		double brakePower = getBrakeForce() * getBrakeForceMax() * getSpeed();
-		System.out.println("brakePower = " + f.format(brakePower) + " W");
+		//System.out.println("brakePower = " + f.format(brakePower) + " W");
 		double totalPower = accelerationPower - brakePower - totalForce
 				* getSpeed();
 
@@ -256,11 +256,8 @@ public class Train extends TrackElement {
 		if (Double.isNaN(newSpeed)) {
 			newSpeed = getSpeed() + 1;
 		}
-		if (deltaT != 0) {
-			double way = (getSpeed() + newSpeed) / 2 * deltaT;
-			System.out.println(way);
-			// if(! Double.isNaN(pos)){
-			setPosition(getPosition() + way);
+		if (deltaT != 0) {			
+			setPosition(getPosition() + (getSpeed() + newSpeed) / 2 * deltaT);
 
 			setAcceleration((newSpeed - getSpeed()) / deltaT);
 		}

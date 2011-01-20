@@ -17,6 +17,7 @@ Modul \textit{Soft Computing}\\
 Prof. Dr. Oleg Taraszow\\ \\
 Betreuer: Lukas Militz
 }
+% Matrikel: Daniel: 128017, Antonia: 328213
 \title{Fuzzygesteuerte U-Bahn Simulation}
 \date{Wintersemester 2010/11}
 
@@ -30,7 +31,10 @@ Betreuer: Lukas Militz
 \newpage 
 
 \tableofcontents
+
 \begin{abstract}
+Diese Dokumentation beschreibt das Projekt \textit{FUZ-Bahn}, das wir im Praktikum zum Modul \textit{Soft Computing} im Wintersemester 2010/11 am Fachbereich Angewandte Informatik der Hochschule Fulda durchführten unter Betreung von Lukas Militz.
+Zum Projektergebnis gehören eine fis-Datei der Fuzzy-Toolbox von Matlab sowie ein lauffähiges Java-Applet zu Visualisierung. Alle Ergebnisse inklusive Quellcode sowie diese Dokumentation sind über den Link \url{https://github.com/straight-shoota/FUZ-Bahn} auf der Online-Plattform Github zum Download verfügbar.
 \end{abstract}
 
 \newpage 
@@ -157,7 +161,62 @@ Damit waren die Projektvorgaben (siehe \hyperref[projektvorgaben]{Figure \ref*{p
 
 \subsection{Fuzzy-Toolbox}
 
+Die Fuzzy-Toolbox in MATLAB ist ein Werkzeug, um einen Regler zu erstellen und in einer graphischen Übersicht sehen zu können, ob in einer bestimmten Situation eine (bestimmte) Regel greift. Also ob ein erwarteter Output entsprechend dem Input erfolgt. In einer graphischen Umgebung können so Regeln erstellt und editiert, sowie das Greifen der Regeln überprüft werden.\\
+In den folgenden Bildern sind die einzelnen Teilbereiche der Toolbox zu sehen, mit der die Regeln für den Controller erstellt wurden.
+
+\begin{figure}[htb]
+\leavevmode
+\includegraphics[width=\textwidth]{matlab1}
+\caption[Hauptansicht]{Hauptansicht Fuzzy-Toolbox}
+\label{matlab1}
+\end{figure}
+
+\begin{figure}[htb]
+\leavevmode
+\includegraphics[width=\textwidth]{matlab_regeln}
+\caption[Ansicht Regeln]{Regelansicht Fuzzy-Toolbox}
+\label{matlab_regeln}
+\end{figure}
+
+\begin{figure}[htb]
+\leavevmode
+\includegraphics[width=\textwidth]{matlab_regeln_graphisch}
+\caption[Ansicht Regeln (graphisch)]{Regelansicht Fuzzy-Toolbox, graphisch}
+\label{matlab_regeln_graphisch}
+\end{figure}
+
+Die Regeln, die in MATLAB erstellt wurden und dann per Hand in das fcl-Format überführt wurden, waren mit dem Applet allerdings nicht lauffähig, sodass wir die Regeln erneut erstellten. Das zweite Mal verwendeten wir gleich das fcl-Format, um die Kompatibilität mit dem Applet gewährleisten und gleich testen zu können. Diese Regeln waren dann auch lauffähig.
+
 \subsection{Applet}
+Das Applet setzt die theoretischen Vorgaben in Programmcode und visuell um. Dabei werden die angegebenen Ausgangsvariablen überwacht und entsprechend der Regeln auf die gegebene Situation reagiert. \\
+Ein Zug, der zu dicht auf seinen Vordermann auffährt, bremst ab und überwacht den Abstand, bis wieder beschleunigt werden kann. \\
+Nähert sich der Zug einer Station, so bremst er rechtzeitig ab und hält an der Bahnsteigkante an.
+
+\paragraph*{•}
+Zur Fuzzy-Steuerung dient die Open-Source-Bibliothek jFuzzyLogic (\url{http://jfuzzylogic.sourceforge.net}), ferner werden die Diagramme von der ebenso unter der GPL lizensierten Chart-Bibliothek JFreeChart (\url{http://www.jfree.org/jfreechart/}).
+
+Die graphischen Oberfläche ist mit Swing realisiert und in zwei Bereiche unterteilt. Der obere Bereich stellt graphisch die Situation dar. Der untere Teil zeigt die Werte der Eingangsvariablen und die zugehörigen Werte der Ausgangsvariablen, sowie das Szenario.\\
+Das Szenario ist fest vorgeschrieben. Es beinhaltet eine Station, an der der Zug anhält. Des Weiteren gibt es Abschnitte, die eine Geschwindigkeitsbegrenzung des fahrenden Zugs vorsehen. Zusätzlich ist implementiert, dass zu einem vorausfahrenden Zuge ein Sicherheitsabstand eingehalten wird. \\
+Der Zustand eines Beispiel-Szenario kann man im folgenden Bild sehen:
+
+\begin{figure}[htb]
+\includegraphics[width=\textwidth]{screenshot1}
+\caption[Screenshot]{Screenshot der Java-Oberfläche zum Fuzzy-Regler: Zug hält an Station A}
+\label{screenshot1}
+\end{figure}
+
+Die erste Reihen sind die Eingangsvariablen als Messwerte verschiedener Sensoren.
+In der zweiten Reihe befinden sich die Ausgangsvariablen, die der Fuzzy-Regler anhand der vorgegebenen Regeln bestimmt.
+Die simulierten Züge werden alle vom Fuzzy-Regler gesteuert, die Anzeigen gehören jeweils zum rot markierten "Train No. 1".
+Neben den Ausgangsvariablen ist das Szenario als Liste dargestellt. Haltestellen und die Abschnitte mit Geschwindigkeitsbegrenzung sind im Programm als feste Teststrecke vorgegeben.
+Wenn ein Zug eine Haltestelle oder einen Langsamfahrstrecke passiert, werden die Elemente, abhängig der Nähe zum Zug, entsprechend in der Liste "Positions on track" verschoben.\\ \\
+Die Steuerung des Applets selbst wird in der Kopfleiste vorgenommen. Dort kann es gestartet, angehalten und zurückgesetzt werden.
+Außerdem kann die Simulationsgeschwindigkeit hier geregelt werden.\\
+Innerhalb der Simulation hält der Zug entsprechend Abstand zu dem voran fahrenden Fahrzeug. Je nach Geschwindigkeitsunterschied wird entsprechend auf die Situation reagiert. Ist der vordere Zug langsamer, bremst die Bahn, ist er schneller, kann ggf. beschleunigt werden, sofern keine Geschwindigkeitsbegrenzung in unmittelbarer Nähe vorliegt. \\
+Diese theoretischen Vorgaben sind im Applet umgesetzt und der Regler hält sich daran. Dabei spielt es ebenfalls keine Rolle, wie viele Züge sich auf der Strecke befinden, der Regler erkennt dies und steuert alle Züge entsprechend der Situation.\\
+Ist eine Geschwindigkeitsbegrenzung in unmittelbarer Nähe, gibt der Regler Signale an Bremse und Motor des Zugs, damit dieser entsprechend abbremst und an der Marke der Geschwindigkeitsbegrenzung die vorgegebene Geschwindigkeit, beispielsweise 50 km/h, einhält.\\
+Befindet sich eine Haltestelle in Reichweite des Zuges, regelt der Controller das Abbremsen und Anhalten des Zuges und nachfolgend das erneute Anfahren und das Verhalten des Zuges auf den weiteren Streckenabschnitten.\\
+Demzufolge sind alle wichtigen Eigenschaften, die eine einfach U-Bahnsimulation haben muss, erfüllt.
 
 \subsubsection{Dynamikberechnungen}
 \begin{equation}
@@ -208,6 +267,12 @@ W_B = m * a
 P_{eff} = \sum W * v
 \end{equation}
 
+\begin{figure}[htb]
+\includegraphics[width=\textwidth]{track}
+\caption[Screenshot]{Ansicht der Gleisdarstellung}
+\label{track}
+\end{figure}
+
 \subsubsection{Fahrzeugparameter}
 Um die Berechnungen mit realistischen Werten durchführen zu können, erhielt unser Testfahrzeug typische Fahreigenschaften eines U-Bahn-Fahrzeugs. Insbesondere lehnten wir uns an die \textit{Baureihe B} der U-Bahn München, die bei der U-Bahn Nürnberg als Dt2 auch im Mischbetrieb mit automatisch gesteuerten Triebfahrzeugen verkehrt, und die \textit{Baureihe H} der U-Bahn Berlin an.
 
@@ -227,6 +292,12 @@ Um die Berechnungen mit realistischen Werten durchführen zu können, erhielt un
 \label{datenblatt}
 \end{figure}
 
-\section{Zusammenfassung}
- 
+\section{Fazit}
+Die Verwendung des in Matlab erzeugten Reglers erwies sich als schwieriges Unterfangen. Trotz Konvertierung in das von jFuzzyLogic verwendete FCL-Format brachte der Regler in der Java-Umgebung nicht die erwarteten Ergebnisse. Als Resultat blieb uns nichts anderes übrig, als die Regeln neu zu entwickeln und direkt in der Simulation live zu testen. Letztendlich kamen wir dabei dann sogar mit weniger Regeln gut zurecht.
+Um die Projektvorgaben (siehe \hyperref[projektvorgaben]{Figure \ref*{projektvorgaben}}) jedoch einzuhalten, haben wir auch unsere ursprüngliche fis-Datei beibehalten.\\
+Die Zusammenarbeit in der Gruppe hat gut funktioniert, es ist in unseren Augen ein vernünftiges Ergebnis entstanden. Von der Fuzzy-Toolbox waren wir allerdings ein wenig enttäuscht, da sie nicht sehr übersichtlich und schlecht bedienbar ist.\\
+Die Dokumentation in der Gruppe war interessant; da es sich um eine wissenschaftliche Arbeit handelt, haben wir uns entschlossen, sie in Vorbereitung auf kommende Aufgaben wir die Bachlorthesis in \LaTeX zu schreiben, was auch gut geklappt hat.\\
+Das Hauptproblem, auf das wir gestoßen sind, war, wie oben bereits genannt, die Tatsache, dass sich die vorgesehene Datei für den Fuzzy-Regler nicht verwenden ließ und wir mit den Regeln von vorne beginnen mussten.\\
+Die Programmierung und Visualisierung hingegen waren nicht sehr problematisch, wenngleich nichts destotrotz auch aufwändig.
+
 \end{document}

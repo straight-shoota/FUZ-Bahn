@@ -50,7 +50,9 @@ public class FuzzyController {
 	public FIS getFis() {
 		return fis;
 	}
-
+	public Train getTrain(){
+		return train;
+	}
 	public synchronized void update() {
 		for (FuzzyValue v : getValues().values()) {
 			if (v.isInput()) {

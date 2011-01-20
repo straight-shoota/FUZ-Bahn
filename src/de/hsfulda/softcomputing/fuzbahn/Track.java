@@ -64,7 +64,7 @@ public class Track implements Iterable<TrackElement> {
 		return elements.remove(e);
 	}
 
-	public Iterable<Train> getTrains() {
+	public List<Train> getTrains() {
 		List<Train> trains = new Vector<Train>();
 		for (TrackElement e : elements) {
 			if (e instanceof Train) {

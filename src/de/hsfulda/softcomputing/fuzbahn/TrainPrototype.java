@@ -16,7 +16,9 @@ public class TrainPrototype {
 	private String name;
 
 	public Train createTrain() {
-		return new Train(this);
+		Train t = new Train(this);
+		t.update(0);
+		return t;
 	}
 
 	/**

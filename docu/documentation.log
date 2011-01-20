@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2011.1.18)  19 JAN 2011 01:22
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2011.1.18)  20 JAN 2011 23:42
 entering extended mode
 **documentation.tex
 ("D:\My Dropbox\STUDIUM\WS1011\Soft Computing\Projekt\docu\documentation.tex"
@@ -332,104 +332,356 @@ File: pdftex.def 2010/02/14 v0.04n Graphics/color for pdfTeX
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\hyperref\hyperref.sty"
+Package: hyperref 2010/03/30 v6.80u Hypertext links for LaTeX
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2010/04/08 v1.5 LaTeX kernel commands for general use (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2010/03/01 v1.9 Key value parser (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2010/01/28 v1.3 Prefix for e-TeX command names (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\pdfescape.sty"
+Package: pdfescape 2010/03/01 v1.9 Provides hex, PDF name and string conversion
+s (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2010/04/01 v0.9 Utility functions of pdfTeX for LuaTeX (HO)
+
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2010/01/28 v2.1 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ifxetex\ifxetex.sty"
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\hycolor.sty"
+Package: hycolor 2009/12/12 v1.6 Color options of hyperref/bookmark (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\xcolor-patch.sty"
+Package: xcolor-patch 2009/12/12 xcolor patch
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\letltxmacro.sty"
+Package: letltxmacro 2008/06/24 v1.3 Let assignment for LaTeX macros (HO)
+)
+\@linkdim=\dimen114
+\Hy@linkcounter=\count100
+\Hy@pagecounter=\count101
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\hyperref\pd1enc.def"
+File: pd1enc.def 2010/03/30 v6.80u Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\intcalc.sty"
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\hyperref.cfg"
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2010/02/22 v3.7 Keyval support for LaTeX options (HO)
+)
+Package hyperref Info: Hyper figures OFF on input line 3609.
+Package hyperref Info: Link nesting OFF on input line 3614.
+Package hyperref Info: Hyper index ON on input line 3617.
+Package hyperref Info: Plain pages OFF on input line 3624.
+Package hyperref Info: Backreferencing OFF on input line 3629.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3825.
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ltxmisc\url.sty"
+\Urlmuskip=\muskip11
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4105.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\bitset.sty"
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\bigintcalc.sty"
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+))
+\Fld@menulength=\count102
+\Field@Width=\dimen115
+\Fld@charsize=\dimen116
+\Field@toks=\toks22
+Package hyperref Info: Hyper figures OFF on input line 5083.
+Package hyperref Info: Link nesting OFF on input line 5088.
+Package hyperref Info: Hyper index ON on input line 5091.
+Package hyperref Info: backreferencing OFF on input line 5098.
+Package hyperref Info: Link coloring OFF on input line 5103.
+Package hyperref Info: Link coloring with OCG OFF on input line 5108.
+Package hyperref Info: PDF/A mode OFF on input line 5113.
+LaTeX Info: Redefining \ref on input line 5153.
+LaTeX Info: Redefining \pageref on input line 5157.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\atbegshi.sty"
+Package: atbegshi 2010/03/25 v1.12 At begin shipout hook (HO)
+)
+\Hy@abspage=\count103
+\c@Item=\count104
+\c@Hfootnote=\count105
+)
+* hyperref using default driver hpdftex *
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\hyperref\hpdftex.def"
+File: hpdftex.def 2010/03/30 v6.80u Hyperref driver for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\atveryend.sty"
+Package: atveryend 2010/03/24 v1.5 Hooks at very end of document (HO)
+Package atveryend Info: \enddocument detected (standard).
+)
+\Fld@listcount=\count106
+\c@bookmark@seq@number=\count107
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\rerunfilecheck.sty"
+Package: rerunfilecheck 2010/03/16 v1.6 Rerun checks for auxiliary files (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\uniquecounter.sty"
+Package: uniquecounter 2009/12/18 v1.1 Provides unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+71.
+)
+\Hy@SectionHShift=\skip46
+)
 \@indexfile=\write3
 
 Writing index file documentation.idx
 ("D:\My Dropbox\STUDIUM\WS1011\Soft Computing\Projekt\docu\documentation.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count100
-\scratchdimen=\dimen114
+\scratchcounter=\count108
+\scratchdimen=\dimen117
 \scratchbox=\box28
-\nofMPsegments=\count101
-\nofMParguments=\count102
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count103
-\MPscratchDim=\dimen115
-\MPnumerator=\count104
-\everyMPtoPDFconversion=\toks23
+\nofMPsegments=\count109
+\nofMParguments=\count110
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count111
+\MPscratchDim=\dimen118
+\MPnumerator=\count112
+\everyMPtoPDFconversion=\toks24
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 22.
- ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd"
+\AtBeginShipoutBox=\box29
+Package hyperref Info: Link coloring OFF on input line 26.
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\hyperref\nameref.sty"
+Package: nameref 2010/01/25 v2.36 Cross-referencing by name of section
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\refcount.sty"
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2009/12/18 v1.3 Cleanup title references (HO)
+)
+\c@section@level=\count113
+)
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+
+("D:\My Dropbox\STUDIUM\WS1011\Soft Computing\Projekt\docu\documentation.out")
+("D:\My Dropbox\STUDIUM\WS1011\Soft Computing\Projekt\docu\documentation.out")
+\@outlinefile=\write4
+LaTeX Font Info:    Try loading font information for U+msa on input line 29.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 22.
+LaTeX Font Info:    Try loading font information for U+msb on input line 29.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
+<img//ubahnlogo.png, id=59, 1003.75pt x 1003.75pt>
+File: img//ubahnlogo.png Graphic file (type png)
+ <use img//ubahnlogo.png>
+[1
+
+{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map} <D:/My Dropbox/STUDIUM/WS1
+011/Soft Computing/Projekt/docu/img/ubahnlogo.png>]
 ("D:\My Dropbox\STUDIUM\WS1011\Soft Computing\Projekt\docu\documentation.toc")
-\tf@toc=\write4
+\tf@toc=\write5
 
-Overfull \hbox (10.99025pt too wide) in paragraph at lines 28--31
-[]\OT1/cmr/m/n/9 Unsere Auf-gaben-stel-lung war es, im Rah-men des Prak-tikums 
-zur Lehrver-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 35.
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
+[2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 50.
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
- [1
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
 
-{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}]
-<img//Sendai_subway_1014_20081021.jpg, id=14, 4288.02pt x 2858.68pt>
+<img//Sendai_subway_1014_20081021.jpg, id=98, 4288.02pt x 2858.68pt>
 File: img//Sendai_subway_1014_20081021.jpg Graphic file (type jpg)
 
-<use img//Sendai_subway_1014_20081021.jpg>
-Overfull \hbox (2.90337pt too wide) in paragraph at lines 60--61
+<use img//Sendai_subway_1014_20081021.jpg> [3 <D:/My Dropbox/STUDIUM/WS1011/Sof
+t Computing/Projekt/docu/img/Sendai_subway_1014_20081021.jpg>]
+Overfull \hbox (2.90337pt too wide) in paragraph at lines 80--81
 \OT1/cmr/m/n/10 Still-stand anz-u-fahren und bis zu einer bes-timmten, fest-ge-
 set-zten Geschwindigkeit
  []
 
-[2 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/docu/img/Sendai_subway_
-1014_20081021.jpg>]
-Overfull \hbox (1.35197pt too wide) in paragraph at lines 78--79
- \OT1/cmr/bx/n/10 Wer-te-bere-iche[] \OT1/cmr/m/n/10 Die ak-tuelle Geschwindigk
-eit betragt min-destens $0 \OML/cmm/m/it/10 km=h$\OT1/cmr/m/n/10 . Als
+
+Overfull \hbox (6.81995pt too wide) in paragraph at lines 94--98
+\OT1/cmr/m/n/10 stattdessen den Geschwindigkeit-sun-ter-schied als Dif-ferenz v
+on Zielgeschwindigkeit
  []
 
-[3] [4]
-("D:\My Dropbox\STUDIUM\WS1011\Soft Computing\Projekt\docu\documentation.aux") 
-) 
+
+Overfull \hbox (1.35197pt too wide) in paragraph at lines 99--100
+ []\OT1/cmr/bx/n/10 Wertebereiche[] \OT1/cmr/m/n/10 Die ak-tuelle Geschwindigke
+it betragt min-destens $0 \OML/cmm/m/it/10 km=h$\OT1/cmr/m/n/10 . Als
+ []
+
+[4] <img//var_speed.png, id=117, 675.52374pt x 204.765pt>
+File: img//var_speed.png Graphic file (type png)
+
+<use img//var_speed.png>
+<img//var_target_distance.png, id=118, 675.52374pt x 204.765pt>
+File: img//var_target_distance.png Graphic file (type png)
+
+<use img//var_target_distance.png>
+<img//var_target_speed.png, id=119, 675.52374pt x 204.765pt>
+File: img//var_target_speed.png Graphic file (type png)
+
+<use img//var_target_speed.png> [5 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing
+/Projekt/docu/img/var_speed.png> <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/P
+rojekt/docu/img/var_target_distance.png> <D:/My Dropbox/STUDIUM/WS1011/Soft Com
+puting/Projekt/docu/img/var_target_speed.png>]
+<img//var_power.png, id=132, 675.52374pt x 204.765pt>
+File: img//var_power.png Graphic file (type png)
+ <use img//var_power.png>
+Overfull \hbox (5.64037pt too wide) in paragraph at lines 141--142
+ []\OT1/cmr/bx/n/10 Beim Brem-sen[] \OT1/cmr/m/n/10 (neg-a-tive Beschle-u-ni-gu
+ng) wirkt ein-er-seits die Be-trieb-s-bremse,
+ []
+
+<img//var_brake.png, id=133, 675.52374pt x 204.765pt>
+File: img//var_brake.png Graphic file (type png)
+ <use img//var_brake.png>
+[6 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/docu/img/var_power.png>
+ <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/docu/img/var_brake.png>]
+<img//matlab1.jpg, id=145, 1263.21938pt x 300.3722pt>
+File: img//matlab1.jpg Graphic file (type jpg)
+ <use img//matlab1.jpg>
+<img//matlab_regeln.jpg, id=146, 1263.97218pt x 715.17188pt>
+File: img//matlab_regeln.jpg Graphic file (type jpg)
+
+<use img//matlab_regeln.jpg>
+<img//matlab_regeln_graphisch.jpg, id=147, 1263.97218pt x 578.16pt>
+File: img//matlab_regeln_graphisch.jpg Graphic file (type jpg)
+
+<use img//matlab_regeln_graphisch.jpg>
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 196.
+
+Overfull \hbox (7.80453pt too wide) in paragraph at lines 196--197
+\OT1/cmtt/m/n/10 / / jfuzzylogic . sourceforge . net$[]\OT1/cmr/m/n/10 ), ferne
+r wer-den die Di-a-gramme von der ebenso
+ []
+
+[7 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/docu/img/matlab1.jpg>]
+<img//screenshot1.png, id=157, 1211.52625pt x 656.4525pt>
+File: img//screenshot1.png Graphic file (type png)
+
+<use img//screenshot1.png>
+Underfull \hbox (badness 10000) in paragraph at lines 208--220
+
+ []
+
+
+Overfull \hbox (0.5284pt too wide) in paragraph at lines 208--220
+\OT1/cmr/m/n/10 Demzufolge sind alle wichti-gen Eigen-schaften, die eine ein-fa
+ch U-Bahnsimulation
+ []
+
+[8 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/docu/img/matlab_regeln.
+jpg>] [9 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/docu/img/matlab_r
+egeln_graphisch.jpg>] <img//track.png, id=182, 887.315pt x 94.3525pt>
+File: img//track.png Graphic file (type png)
+
+<use img//track.png> [10 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/d
+ocu/img/screenshot1.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 303.
+ [11 <D:/My Dropbox/STUDIUM/WS1011/Soft Computing/Projekt/docu/img/track.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 303.
+
+("D:\My Dropbox\STUDIUM\WS1011\Soft Computing\Projekt\docu\documentation.aux")
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 303.
+Package rerunfilecheck Info: File `documentation.out' has not changed.
+(rerunfilecheck)             Checksum: 9944AF5FA0411A69EF4DE0D5C6A99266;872.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2042 strings out of 495285
- 24499 string characters out of 3179869
- 77064 words of memory out of 3000000
- 5225 multiletter control sequences out of 15000+200000
- 12802 words of font info for 49 fonts, out of 3000000 for 9000
+ 5803 strings out of 495285
+ 83844 string characters out of 3179869
+ 155871 words of memory out of 3000000
+ 8807 multiletter control sequences out of 15000+200000
+ 15152 words of font info for 59 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 27i,9n,22p,682b,293s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+ 31i,8n,28p,553b,380s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbsy10.pfb
+><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
 C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:
 /Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program
- Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files
- (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x8
-6)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/M
-iKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiK
-TeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTe
-X 2.8/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on documentation.pdf (4 pages, 5654375 bytes).
+ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program F
+iles (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program File
+s (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (
+x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86
+)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/Mi
+KTeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX
+ 2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.8
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/f
+onts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fon
+ts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts
+/type1/public/amsfonts/cm/cmti9.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/ty
+pe1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type
+1/public/amsfonts/cm/cmtt8.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/p
+ublic/amsfonts/cm/cmtt9.pfb>
+Output written on documentation.pdf (11 pages, 6511387 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 285 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 500000)
+ 173 words of extra memory for PDF output out of 10000 (max. 10000000)
 

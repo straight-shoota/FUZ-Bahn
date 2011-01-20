@@ -1,6 +1,7 @@
 package de.hsfulda.softcomputing.fuzbahn.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
@@ -70,8 +71,14 @@ implements TrackPostitionListener, SimulationStateListener {
 		varsp.add(trackPanel);
 
 		add(varsp, BorderLayout.CENTER);
-
+		JPanel top = new JPanel();
 		JPanel buttons = new JPanel();
+		
+		JLabel label = new JLabel("<html>Fuzzy controller for " + c.getTrain().getName() + "</html>");
+		label.setForeground(Color.RED);
+		
+		buttons.add(label);
+		
 		startButton = new JButton(new StartAction());
 		stopButton = new JButton(new StopAction());
 		stopButton.setEnabled(false);

@@ -1,21 +1,28 @@
-\contentsline {section}{\numberline {1}Projektrahmen}{1}
-\contentsline {subsection}{\numberline {1.1}Aufgabenstellung}{1}
-\contentsline {subsection}{\numberline {1.2}Projektrahmen}{2}
-\contentsline {paragraph}{}{2}
-\contentsline {paragraph}{}{3}
-\contentsline {paragraph}{}{3}
-\contentsline {section}{\numberline {2}Vor\IeC {\"u}berlegungen}{3}
-\contentsline {subsection}{\numberline {2.1}Szenario}{3}
-\contentsline {subsubsection}{\numberline {2.1.1}Eingangsvariablen}{3}
-\contentsline {paragraph}{}{3}
-\contentsline {paragraph}{}{3}
-\contentsline {paragraph}{Wertebereiche}{3}
-\contentsline {subparagraph}{}{3}
-\contentsline {subsubsection}{\numberline {2.1.2}Ausgangsvariablen}{4}
-\contentsline {paragraph}{}{4}
-\contentsline {paragraph}{}{4}
-\contentsline {paragraph}{}{4}
-\contentsline {section}{\numberline {3}Umsetzung}{4}
-\contentsline {subsection}{\numberline {3.1}Fuzzy-Toolbox}{4}
-\contentsline {subsection}{\numberline {3.2}Applet}{4}
-\contentsline {section}{\numberline {4}Zusammenfassung}{4}
+\contentsline {section}{\numberline {1}Projektrahmen}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Aufgabenstellung}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Projektrahmen}{3}{subsection.1.2}
+\contentsline {paragraph}{}{4}{section*.2}
+\contentsline {paragraph}{}{4}{section*.3}
+\contentsline {paragraph}{}{4}{section*.4}
+\contentsline {section}{\numberline {2}Vor\IeC {\"u}berlegungen}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Szenario}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Fuzzy-Regler}{4}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Eingangsvariablen}{4}{subsubsection.2.2.1}
+\contentsline {paragraph}{Wertebereiche}{5}{section*.5}
+\contentsline {subsubsection}{\numberline {2.2.2}Ausgangsvariablen}{6}{subsubsection.2.2.2}
+\contentsline {paragraph}{Zum Beschleunigen}{6}{section*.6}
+\contentsline {paragraph}{Beim Bremsen}{6}{section*.7}
+\contentsline {paragraph}{Wertebereiche}{7}{section*.8}
+\contentsline {section}{\numberline {3}Umsetzung}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Fuzzy-Toolbox}{7}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Applet}{7}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Dynamikberechnungen}{9}{subsubsection.3.2.1}
+\contentsline {paragraph}{Geschwindigkeit abh\IeC {\"a}ngig von Zeit und Energiever\IeC {\"a}nderung}{9}{section*.10}
+\contentsline {paragraph}{Fahrwiderst\IeC {\"a}nde}{9}{section*.11}
+\contentsline {subparagraph}{Rollwiderstand}{10}{section*.12}
+\contentsline {subparagraph}{Luftwiderstand}{10}{section*.13}
+\contentsline {subparagraph}{Streckenwiderst\IeC {\"a}nde}{10}{section*.14}
+\contentsline {subparagraph}{Beschleunigungswiderstand}{10}{section*.15}
+\contentsline {paragraph}{Traktionsleistung}{10}{section*.16}
+\contentsline {subsubsection}{\numberline {3.2.2}Fahrzeugparameter}{11}{subsubsection.3.2.2}
+\contentsline {section}{\numberline {4}Fazit}{11}{section.4}

@@ -16,6 +16,7 @@ import net.sourceforge.jFuzzyLogic.rule.Variable;
 import org.jfree.chart.JFreeChart;
 
 import de.hsfulda.softcomputing.fuzbahn.FuzzyController;
+import de.hsfulda.softcomputing.fuzbahn.FuzzyUnavailableException;
 import de.hsfulda.softcomputing.fuzbahn.FuzzyValue;
 import de.hsfulda.softcomputing.fuzbahn.Track;
 import de.hsfulda.softcomputing.fuzbahn.Train;
@@ -32,7 +33,7 @@ public abstract class AbstractTest implements Runnable {
 	private Thread thread;
 
 	protected Track track;
-	FuzzyController controller;
+	FuzzyController[] controller;
 
 	public AbstractTest() {
 		initModel();
@@ -40,6 +41,17 @@ public abstract class AbstractTest implements Runnable {
 	}
 
 	protected void initModel() {
+	}
+	protected void initControllers(){
+		controller = new FuzzyController[track.getTrains().size()];
+		try {
+			int i = 0;
+			for(Train t : track.getTrains()){
+				controller[i++] = new FuzzyController(t);
+			}
+		} catch (FuzzyUnavailableException exc) {
+			exc.printStackTrace();
+		}
 	}
 
 	protected void initUI() {
@@ -92,11 +104,13 @@ public abstract class AbstractTest implements Runnable {
 		setInitValues();
 	}
 	protected void setInitValues(){
+		double pos = 0D;
 		for(Train e : track.getTrains()){
-			e.setPosition(0D);
+			e.setPosition(pos);
 			e.setSpeed(0D);
 			e.setPowerRatio(0D);
 			e.setBrakeForce(0D);
+			pos += 100D;
 		}
 	}
 
@@ -115,7 +129,7 @@ public abstract class AbstractTest implements Runnable {
 		this.simulationScale = simulationScale;
 	}
 
-	public FuzzyController getController() {
+	public FuzzyController[] getControllers() {
 		return controller;
 	}
 
@@ -124,7 +138,9 @@ public abstract class AbstractTest implements Runnable {
 	}
 
 	protected void doStep(double deltaT) {
-		controller.update();
+		for(FuzzyController c : controller){
+			c.update();
+		}
 		for (Train t : track.getTrains()) {
 			t.update(deltaT);
 		}
@@ -141,7 +157,7 @@ public abstract class AbstractTest implements Runnable {
 		 */
 
 		prototype.setName("B");
-		prototype.setBrakeForceMax(100000D);
+		prototype.setBrakeForceMax(300000D);
 		prototype.setLength(40D);
 		prototype.setPowerMax(780000D);
 		prototype.setPowerMin(-780000D);

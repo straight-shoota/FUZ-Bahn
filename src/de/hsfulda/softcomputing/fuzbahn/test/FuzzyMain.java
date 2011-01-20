@@ -16,17 +16,9 @@ public class FuzzyMain extends AbstractTest {
 		t.update(0);
 		track.add(t);
 		try {
-			controller = new FuzzyController(t);
+			controller = new FuzzyController[]{new FuzzyController(t)};
 		} catch (FuzzyUnavailableException exc) {
 			exc.printStackTrace();
-		}
-	}
-
-	protected void doStep(double deltaT) {
-		for (Train t : track.getTrains()) {
-			controller.update();
-			t.update(deltaT);
-			System.out.println(t);
 		}
 	}
 

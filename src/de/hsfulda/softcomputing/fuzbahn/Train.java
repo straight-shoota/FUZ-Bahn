@@ -14,6 +14,7 @@ public class Train extends TrackElement {
 	public static final String POWER_RATIO = "power";
 
 	private double brakeForce;
+	private String name;
 
 	/**
 	 * Current power of train engine. Valid values are in percent ranging from
@@ -35,6 +36,7 @@ public class Train extends TrackElement {
 	public Train(TrainPrototype prototype) {
 		super(prototype.getLength());
 		this.prototype = prototype;
+		this.setName("Train (" + prototype.getName() + ")");
 	}
 
 	/**
@@ -202,7 +204,10 @@ public class Train extends TrackElement {
 	}
 
 	public String getName() {
-		return "Train (" + prototype.getName() + ")";
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**

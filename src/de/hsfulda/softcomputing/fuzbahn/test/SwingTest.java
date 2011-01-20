@@ -20,7 +20,7 @@ import de.hsfulda.softcomputing.fuzbahn.gui.train.*;
 
 public abstract class SwingTest extends AbstractTest {
 	JFrame frame;
-	FUZPanel panel;
+	JPanel panel;
 	Train t;
 	Train t2;
 	
@@ -56,7 +56,7 @@ public abstract class SwingTest extends AbstractTest {
 		JPanel cp = new JPanel();
 		cp.setLayout(new BorderLayout());
 		
-		panel = new FUZPanel(this, getControllers()[0], getTrack());
+		FUZPanel panel = new FUZPanel(this, getControllers()[0], getTrack());
 		cp.add(panel, BorderLayout.CENTER);
 		
 		TrackPanel gui = new TrackPanel(t);
